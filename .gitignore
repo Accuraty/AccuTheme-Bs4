@@ -1,0 +1,69 @@
+# SYSTEM
+.DS_Store
+Thumbs.db
+
+# BUILD FILES
+**/node_modules/
+**/yarn-error.log
+**/npm-debug.log
+# for a template, we exclude this from getting checked in
+package-lock.json
+# for a project, we do NOT exclude this
+# package-lock.json
+
+# ASSETS
+**/dist/
+**/public/
+**/*.map
+**/*.css
+**/*.bundle.js
+
+# TEMP
+.cache
+.sass-cache/
+*.log
+/logs/
+/tmp/
+package/.tmp/
+real-favicon-generator.json
+
+# ENVIRONMENT
+.env
+.env.*
+
+# MISC FILES
+*~
+*.zip
+*.err
+.cache
+.idea
+.project
+.settings
+*.esproj
+*.sublime*
+*.tmproj
+*.tmproject
+nbproject
+sftp-config.json
+.vscode/sftp.json
+dnn/web.config
+
+# OHS utilities, https://github.com/Accuraty/AccuTheme-2021/issues/47
+# VS Code hack? >>> See notes in .gitmodules file
+.gitmodules
+
+# Accuraty utility; ignore any files OR folders so they do NOT get in to Git/GitHub
+**/*-gitignore.*
+**/*-tmp.*
+
+# allow back PersonaBar CSS Themes, https://github.com/Accuraty/AccuTheme-2021/issues/43
+!**/_default/PersonaBarTheme.css
+!**/_default/EditBarTheme.css
+
+# .sln/.csproj VS Code IntelliSense detritus to ignore
+.vs/
+bin/
+obj/
+
+# [to be removed?, we don't do this anymore ] if AccuCode is setup as a separate project (.gitmodules, /App_Code), uncomment this
+# app/App_Code/
