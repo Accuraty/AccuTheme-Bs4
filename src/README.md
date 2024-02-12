@@ -13,15 +13,15 @@ The `src/` folder includes all stylesheets, fonts, images, and scripts needed to
 
 _Note: If new directories are needed, you will need to modify the Gulp config to account for these new assets._
 
-### fonts/
+### media/fonts/
 
 Source files for fonts included with the project are saved here.
 
-### svg/
+### media/svg/
 
 SVG files for icons, logos, etc.
 
-### images/
+### media/images/
 
 Images that are used in the skin itself (e.g., backgrounds, design resources, logos, favicon).
 
