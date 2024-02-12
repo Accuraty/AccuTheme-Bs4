@@ -1,7 +1,7 @@
 {
   "name": "accutheme",
   "version": "1.0.0",
-  "description": "Starter theme for DNN Platform websites using Bootstrap v4.6.2",
+  "description": "Bootstrap v4.6.2 custom theme starter for DNN Platform websites",
   "exports": "./gulpfile.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production gulp build",
@@ -20,7 +20,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Accuraty/AccuTheme-2021.git"
+    "url": "git+https://github.com/Accuraty/AccuTheme-Bs4.git"
   },
   "author": "Accuraty Solutions",
   "license": "ISC",

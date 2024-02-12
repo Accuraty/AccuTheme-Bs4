@@ -1,8 +1,8 @@
 {
-  "name": "___ABBV20YY on dsNNNN",
-  "host": "___dsNNNN.accuraty.net",
-  "username": "___abbvdnnFTPabc",
-  "password": "___PASSWORD14$$##",
+  "name": "ABBV20YY on dsNNNN",
+  "host": "dsNNNN.accuraty.net",
+  "username": "abbv20yydnnFTPabc",
+  "password": "PASSWeRD14$$##",
   "context": "./dnn",
   "protocol": "ftp",
   "port": 21,

@@ -1,4 +1,7 @@
 # Nested projects
+
+## This is old, no longer used, however, leaving it in place for reference
+
 [submodule "2sxc Accu-Content-app"]
 path = dnn/Portals/0/2sxc/Content/Accu
 url = https://github.com/Accuraty/AccuCUE.git
