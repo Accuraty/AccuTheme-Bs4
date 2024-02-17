@@ -74,11 +74,12 @@
   "extensions": {
     "recommendations": [
       "ms-dotnettools.csdevkit",
-      "thekalinga.bootstrap4-vscode",
-      "aaron-bond.better-comments",
-      "alefragnani.project-manager",
       "natizyskunk.sftp",
-      "gruntfuggly.todo-tree"
+      "alefragnani.project-manager",
+      "ecmel.vscode-html-css",
+      "thekalinga.bootstrap4-vscode",
+      "gruntfuggly.todo-tree",
+      "aaron-bond.better-comments",
     ]
   }
 }
