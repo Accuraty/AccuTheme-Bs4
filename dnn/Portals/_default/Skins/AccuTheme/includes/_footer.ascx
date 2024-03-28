@@ -4,12 +4,15 @@
 
       <%-- LOGO --%>
       <div class="footer__brand  col-12">
+      <!--#include file="_logo.ascx"-->
+        <%--
         <a
           class="d-inline-block text-decoration-none mb-4 mb-md-5"
           href="/"
           aria-label="_xx___WEBSITE_NAME___xx_">
           <!--#include file="_logo.ascx"-->
         </a>
+        --%>
       </div>
 
       <%-- NAV MENUS --%>
@@ -126,6 +129,5 @@
     </div>
   </div>
 </footer>
-
 
  <!--#include file="__debug.ascx"-->
