@@ -2,7 +2,7 @@
 // Site menu
 // =========
 //
-// Used to add an admin menu independent of the primary nav.
+// Site management menu in the navbar. Independent of the primary nav.
 // ----------------------------------------------------------------------------
 
 #site-menu {
@@ -11,6 +11,8 @@
   left: 1rem;
   z-index: $zindex-fixed;
 
+  // this fix is no longer needed starting DNN ~9.11?
+  /*
   .personabar-visible & {
     left: calc(#{$dnn-persona-bar-width} + 1rem);
   }
@@ -20,6 +22,16 @@
   &:not(.dropdown--hoverable) {
     .dropdown-menu.show .dropdown:hover .dropdown-menu {
       display: block;
+    }
+  }
+  */
+
+  .nav-link {
+    color: $white;
+    background-color: $link-color;
+
+    @include hover-focus() {
+      background-color: $link-hover-color;
     }
   }
 }

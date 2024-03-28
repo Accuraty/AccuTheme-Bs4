@@ -53,7 +53,7 @@
     z-index: 1; // Don't remove. Needed for default theme customizations.
   }
 
-  .nav-link {}
+  // .nav-link {}
 }
 
 
@@ -64,7 +64,7 @@
 // Navbars may contain bits of text. This class adjust alignment and spacing.
 // ----------------------------------------------------------------------------
 
-.navbar-text {}
+// .navbar-text {}
 
 
 //
@@ -80,26 +80,7 @@
 //    or image file as needed.
 // ----------------------------------------------------------------------------
 
-.navbar-toggler {} // 1
+// .navbar-toggler {} // 1
 
-.navbar-toggler-icon {} // 2
+// .navbar-toggler-icon {} // 2
 
-
-//
-// Site menu
-// =========
-//
-// Site management menu in the navbar. Independent of the primary nav.
-// ----------------------------------------------------------------------------
-
-#site-menu {
-
-  .nav-link {
-    color: $white;
-    background-color: $link-color;
-
-    @include hover-focus() {
-      background-color: $link-hover-color;
-    }
-  }
-}
