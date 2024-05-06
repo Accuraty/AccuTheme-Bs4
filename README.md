@@ -1,4 +1,4 @@
-# AccuTheme-2021
+# AccuTheme-Bs4
 
 Status: no roadmap, fixes and minor improvements from now on. AccuTheme "redux" in the works (20230305 JRF).
 
