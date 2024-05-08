@@ -60,8 +60,6 @@
 // ============================================================================
 
 
-
-
 // ----------------------------------------------------------------------------
 //
 //  1. Initial variables
@@ -72,8 +70,6 @@
 //  Note: Do not use variables that begin with `$accu-` in your stylesheets.
 //
 // ----------------------------------------------------------------------------
-
-
 
 
 //
@@ -111,8 +107,6 @@ $linkedin-primary:      #0077b5;
 $pinterest-primary:     #bd081c;
 $twitter-primary:       #1da1f2;
 $youtube-primary:       #f00;
-
-
 
 
 //
@@ -163,8 +157,6 @@ $accu-line-height-normal: 1.5;
 $accu-line-height-loose: 1.8;
 
 
-
-
 //
 // # Navbar
 // ========
@@ -175,16 +167,12 @@ $accu-navbar-height-xs: 60px;
 $accu-navbar-height-md: 72px;
 
 
-
-
 //
 // # Transition
 // ============
 
 $accu-transition-timing-function: ease-in-out;
 $accu-transition-duration: 120ms;
-
-
 
 
 //
@@ -201,8 +189,6 @@ $accu-border-radius: .25rem;
 $accu-border-radius-lg: .3rem;
 
 
-
-
 //
 // # Box Shadow
 // ============
@@ -213,8 +199,6 @@ $accu-box-shadow-lg: 0 1rem 3rem rgba($accu-black, .175);
 $accu-box-shadow-hover: 0 .75rem 1.75rem -.125rem rgba($accu-black, .2), 0 .375rem .875rem -.0625rem rgba($accu-black, .15);
 
 
-
-
 //
 // # Bootstrap grid
 // ================
@@ -222,8 +206,6 @@ $accu-box-shadow-hover: 0 .75rem 1.75rem -.125rem rgba($accu-black, .2), 0 .375r
 $accu-grid-columns: 12;
 $accu-grid-gutter-width: 2rem;
 $accu-grid-row-columns: 6;
-
-
 
 
 //
@@ -251,8 +233,6 @@ $skin-svg-path: "#{$skin-media-path}/svg";
 $skin-image-path: "#{$skin-media-path}/images";
 
 
-
-
 // ----------------------------------------------------------------------------
 //
 //  2. Applied variables
@@ -262,8 +242,6 @@ $skin-image-path: "#{$skin-media-path}/images";
 //  Note: These variables are also used in your custom stylesheets.
 //
 // ----------------------------------------------------------------------------
-
-
 
 
 //
@@ -371,8 +349,6 @@ $escaped-characters: (
 );
 
 
-
-
 //
 // # Options
 // =========
@@ -394,8 +370,6 @@ $enable-print-styles:                       true;
 $enable-responsive-font-sizes:              true; // false by default in Bootstrap src
 $enable-validation-icons:                   true;
 $enable-deprecation-messages:               true;
-
-
 
 
 //
@@ -430,8 +404,6 @@ $sizes: (
 );
 
 
-
-
 //
 // # Body
 // ======
@@ -441,8 +413,6 @@ $sizes: (
 
 $body-bg:                   $white;
 $body-color:                $gray-900;
-
-
 
 
 //
@@ -460,8 +430,6 @@ $link-hover-decoration:                   underline;
 $emphasized-link-hover-darken-percentage: 15%;
 
 
-
-
 //
 // # Paragraphs
 // ============
@@ -470,8 +438,6 @@ $emphasized-link-hover-darken-percentage: 15%;
 // ----------------------------------------------------------------------------
 
 $paragraph-margin-bottom:   1em; // Use `em` instead of default `rem`
-
-
 
 
 //
@@ -496,8 +462,6 @@ $grid-breakpoints: (
 @include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
 
 
-
-
 //
 // # Grid containers
 // =================
@@ -516,8 +480,6 @@ $container-max-widths: (
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
 
-
-
 //
 // # Grid columns
 // ==============
@@ -528,8 +490,6 @@ $container-max-widths: (
 $grid-columns: $accu-grid-columns;
 $grid-gutter-width: $accu-grid-gutter-width;
 $grid-row-columns: $accu-grid-row-columns;
-
-
 
 
 //
@@ -580,8 +540,6 @@ $embed-responsive-aspect-ratios: (
   (3 4),
   (1 1),
 );
-
-
 
 
 //
@@ -677,8 +635,6 @@ $mark-bg:                     #fcf8e3;
 $hr-margin-y:                 $spacer;
 
 
-
-
 //
 // # Tables
 // ========
@@ -717,8 +673,6 @@ $table-bg-level:              -9;
 $table-border-level:          -6;
 
 
-
-
 //
 // # Buttons + Forms
 // =================
@@ -749,8 +703,6 @@ $input-btn-font-size-lg:      $font-size-lg;
 $input-btn-line-height-lg:    $line-height-lg;
 
 $input-btn-border-width:      $border-width;
-
-
 
 
 //
@@ -798,8 +750,6 @@ $btn-border-radius-lg:        $border-radius-lg;
 $btn-border-radius-sm:        $border-radius-sm;
 
 $btn-transition:              color $transition-duration $transition-timing-function, background-color $transition-duration $transition-timing-function, border-color $transition-duration $transition-timing-function, box-shadow $transition-duration $transition-timing-function;
-
-
 
 
 //
@@ -876,8 +826,6 @@ $form-group-margin-bottom:              1rem;
 $input-group-addon-color:               $input-color;
 $input-group-addon-bg:                  $gray-200;
 $input-group-addon-border-color:        $input-border-color;
-
-
 
 
 //
@@ -1018,8 +966,6 @@ $custom-file-text: (
 );
 
 
-
-
 //
 // # Form validation
 // =================
@@ -1049,8 +995,6 @@ $form-validation-states: (
 );
 
 
-
-
 //
 // # Z-index master list
 // =====================
@@ -1068,8 +1012,6 @@ $zindex-modal-backdrop:             1040;
 $zindex-modal:                      1050;
 $zindex-popover:                    1060;
 $zindex-tooltip:                    1070;
-
-
 
 
 //
@@ -1097,8 +1039,6 @@ $nav-pills-link-active-bg:          $component-active-bg;
 
 $nav-divider-color:                 $gray-200;
 $nav-divider-margin-y:              $spacer / 2;
-
-
 
 
 //
@@ -1148,8 +1088,6 @@ $navbar-height-xs: $accu-navbar-height-xs;
 $navbar-height-md: $accu-navbar-height-md;
 
 
-
-
 //
 // # Dropdowns
 // ===========
@@ -1185,8 +1123,6 @@ $dropdown-item-padding-x:           1.5rem;
 
 $dropdown-header-color:             $gray-600;
 $dropdown-header-padding:           $dropdown-padding-y $dropdown-item-padding-x;
-
-
 
 
 //
@@ -1225,8 +1161,6 @@ $pagination-disabled-bg:            $white;
 $pagination-disabled-border-color:  $gray-300;
 
 
-
-
 //
 // # Jumbotron
 // ===========
@@ -1237,8 +1171,6 @@ $pagination-disabled-border-color:  $gray-300;
 $jumbotron-padding:                 2rem;
 $jumbotron-color:                   null;
 $jumbotron-bg:                      $gray-200;
-
-
 
 
 //
@@ -1270,8 +1202,6 @@ $card-columns-gap:                  1.25rem;
 $card-columns-margin:               $card-spacer-y;
 
 
-
-
 //
 // # Tooltips
 // ==========
@@ -1300,8 +1230,6 @@ $form-feedback-tooltip-font-size:     $tooltip-font-size;
 $form-feedback-tooltip-line-height:   $line-height-base;
 $form-feedback-tooltip-opacity:       $tooltip-opacity;
 $form-feedback-tooltip-border-radius: $tooltip-border-radius;
-
-
 
 
 //
@@ -1336,8 +1264,6 @@ $popover-arrow-color:               $popover-bg;
 $popover-arrow-outer-color:         fade-in($popover-border-color, .05);
 
 
-
-
 //
 // # Toasts
 // ========
@@ -1361,8 +1287,6 @@ $toast-header-background-color:     rgba($white, .85);
 $toast-header-border-color:         rgba(0, 0, 0, .05);
 
 
-
-
 //
 // # Badges
 // ========
@@ -1383,8 +1307,6 @@ $badge-pill-padding-x:              .6em;
 // Use a higher than normal value to ensure completely rounded edges when
 // customizing padding or font-size on labels.
 $badge-pill-border-radius:          10rem;
-
-
 
 
 //
@@ -1434,8 +1356,6 @@ $modal-transition:                  transform .3s ease-out;
 $modal-scale-transform:             scale(1.02);
 
 
-
-
 //
 // # Alerts
 // ========
@@ -1455,8 +1375,6 @@ $alert-border-level:                -9;
 $alert-color-level:                 6;
 
 
-
-
 //
 // # Progress bars
 // ===============
@@ -1473,8 +1391,6 @@ $progress-bar-color:                $white;
 $progress-bar-bg:                   theme-color("primary");
 $progress-bar-animation-timing:     1s linear infinite;
 $progress-bar-transition:           width .6s ease;
-
-
 
 
 //
@@ -1508,8 +1424,6 @@ $list-group-action-active-color:    $body-color;
 $list-group-action-active-bg:       $gray-200;
 
 
-
-
 //
 // # Image thumbnails
 // ==================
@@ -1525,8 +1439,6 @@ $thumbnail-border-radius:           $border-radius;
 $thumbnail-box-shadow:              0 1px 2px rgba($black, .075);
 
 
-
-
 //
 // # Figures
 // =========
@@ -1536,8 +1448,6 @@ $thumbnail-box-shadow:              0 1px 2px rgba($black, .075);
 
 $figure-caption-font-size:          90%;
 $figure-caption-color:              $gray-600;
-
-
 
 
 //
@@ -1565,8 +1475,6 @@ $breadcrumb-border-radius:          $border-radius;
 // Custom variables added to AccuTheme
 $breadcrumb-color:                  $link-color;
 $breadcrumb-hover-color:            $body-color;
-
-
 
 
 //
@@ -1601,8 +1509,6 @@ $carousel-transition-duration:       .6s;
 $carousel-transition:                transform $carousel-transition-duration ease-in-out; // Define transform transition first if using multiple transitions (e.g., `transform 2s ease, opacity .5s ease-out`)
 
 
-
-
 //
 // # Spinners
 // ==========
@@ -1619,8 +1525,6 @@ $spinner-height-sm:                 $spinner-width-sm;
 $spinner-border-width-sm:           .2em;
 
 
-
-
 //
 // # Close
 // =======
@@ -1632,8 +1536,6 @@ $close-font-size:                   $font-size-base * 1.5;
 $close-font-weight:                 $font-weight-bold;
 $close-color:                       $black;
 $close-text-shadow:                 0 1px 0 $white;
-
-
 
 
 //
@@ -1656,8 +1558,6 @@ $pre-color:                         $gray-900;
 $pre-scrollable-max-height:         340px;
 
 
-
-
 //
 // # Utilities
 // ===========
@@ -1669,8 +1569,6 @@ $displays: none, inline, inline-block, block, flex, inline-flex;
 $overflows: auto, hidden;
 $positions: static, relative, absolute, fixed, sticky;
 $user-selects: all, auto, none;
-
-
 
 
 //
