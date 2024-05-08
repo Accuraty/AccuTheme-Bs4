@@ -15,8 +15,9 @@ Status: no roadmap, fixes and minor improvements from now on. AccuTheme "redux" 
 ## Project requirements, recommendations
 
 - DNN site already deployed
-- [Node/NPM](https://nodejs.org/en) - Node >= v16.18.x
 - [NVM-Windows](https://github.com/coreybutler/nvm-windows) to manage your Node versions
+- [Node/NPM](https://nodejs.org/en) - `/package.json` Engines/Node for required versions
+- TBD: do we need to initially install NodeJS package the normal way first or is it okay to only install using NVM?
 
 ### Cloning locally
 
