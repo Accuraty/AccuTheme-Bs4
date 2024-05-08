@@ -2,13 +2,17 @@
 
 Status: no roadmap, fixes and minor improvements from now on. AccuTheme "redux" in the works (20230305 JRF).
 
+[Maintenance](/README-maintenance.md): of THIS template project, periodic upkeep on dependencies and related
+
+[VS Code Setup](https://www.accu4.com/H2R2S/VS-Code-Initial-Setup): from scratch, new machine, etc.
+
 ## Getting started
 
 - [Initial setup](/README-deploy.md#initial-setup) - you are starting from scratch
 - [Cloning locally](/README.md#cloning-locally) - first time adding this project to your machine
 - [Next steps](../../wiki) <<< ESSENTIAL <<<
 
-## Project requirements and recommendations
+## Project requirements, recommendations
 
 - DNN site already deployed
 - [Node/NPM](https://nodejs.org/en) - Node >= v16.18.x
