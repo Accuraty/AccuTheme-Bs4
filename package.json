@@ -6,16 +6,18 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production gulp build",
     "clean": "gulp clean",
-    "favicons": "gulp favicons",
     "start": "gulp",
+    "updateDLLs": "robocopy \"A:\\dev\\dlls\" \"C:\\dev\\dlls\" /MIR /W:5 /R:2 /NJH /NDL",
+    "cleanDLLs": "pwsh -Command \"Remove-Item -Path C:\\dev\\dlls -Recurse -Force; Copy-Item -Path A:\\dev\\dlls -Destination C:\\dev\\dlls -Recurse -Force\"",
+    "favicons": "gulp favicons",
+    "package": "webpack --config webpack.installer.config.js",
     "lint:scripts": "eslint --format=pretty --fix",
     "lint:styles": "stylelint --syntax scss",
-    "package": "webpack --config webpack.installer.config.js",
     "postinstall": "gulp build"
   },
   "type": "module",
   "engines": {
-    "node": ">=20.11.1 || <22.0.0"
+    "node": ">=20.12.1 || <22.0.0"
   },
   "private": true,
   "repository": {

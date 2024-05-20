@@ -24,6 +24,7 @@
   "ignore": [
     "**/.git/",
     "**/.vscode/",
+    "**/dependencies/",
     "**/gulpfile.js/",
     "**/node_modules/",
     "**/src/",
