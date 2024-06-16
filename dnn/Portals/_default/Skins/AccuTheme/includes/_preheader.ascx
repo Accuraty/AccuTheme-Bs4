@@ -182,3 +182,19 @@ if ( AccuTheme.skinFileExists(AccuTheme.SkinJsPath, "common.bundle.js") )
 --%>
 <%--
 ========================================================================== --%>
+
+<%-- Javascript ESM and DNN Elements example:
+See https://www.accu4.com/2sxc/Dnn-Elements-in-a-2SC-View (202406)
+Also appears in Accu4's /includes/_page__RegisterJs--dnn-elements.ascx
+--%>
+<%-- 
+<dnn:DnnJsInclude
+  FilePath="//unpkg.com/@dnncommunity/dnn-elements/dist/dnn/dnn.esm.js"
+  ForceProvider="DnnPageHeaderProvider"
+  HtmlAttributesAsString="rel:modulepreload,as:script,type:module,crossorigin:anonymous" 
+  Priority="50"
+  runat="server"
+/>
+--%>
+<%--
+========================================================================== --%>
