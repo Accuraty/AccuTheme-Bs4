@@ -11,6 +11,7 @@
 //  - Emphasis
 //  - Lists
 //  - Blockquote
+//  - Text Wrapping
 //
 // ============================================================================
 
@@ -121,3 +122,19 @@ h2,
 }
 
 // .blockquote-footer {}
+
+//
+//  Text Wrapping
+//  ============
+//
+//  Text wrapping, breaking, and balance to prevent widows/orphans
+
+//  Used for Headers
+.text-balance {
+  text-wrap: balance;
+}
+
+//  Used for paragraph text
+.text-pretty {
+  text-wrap: pretty;
+}
