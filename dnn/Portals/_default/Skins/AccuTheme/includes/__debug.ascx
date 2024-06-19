@@ -86,7 +86,7 @@
 
   if ( showDetails ) { 
 %>
-  <div class="alert alert-warning m-0 text-monospace d-print-none" role="alert">
+  <div class="alert alert-warning m-0 text-monospace d-none d-lg-block d-print-none" role="alert">
     <%-- DNN / HOST --%>
     <div class="mb-2">
       <p>
