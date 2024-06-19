@@ -11,13 +11,6 @@
   left: 1rem;
   z-index: $zindex-fixed;
 
-  // this fix is no longer needed starting DNN ~9.11?
-
-  /*
-  .personabar-visible & {
-    left: calc(#{$dnn-persona-bar-width} + 1rem);
-  }
-
   // Nested dropdowns, when the site menu is not
   // included with the `NavMenu` JS component.
   &:not(.dropdown--hoverable) {
@@ -25,8 +18,7 @@
       display: block;
     }
   }
-  */
-
+  
   .nav-link {
     color: $white;
     background-color: $link-color;
@@ -35,4 +27,11 @@
       background-color: $link-hover-color;
     }
   }
+
+  // this fix is no longer needed starting DNN ~9.11?
+  /*
+  .personabar-visible & {
+    left: calc(#{$dnn-persona-bar-width} + 1rem);
+  }
+  */
 }
