@@ -1,7 +1,7 @@
 {
   "name": "ABBV20YY on dsNNNN",
   "host": "dsNNNN.accuraty.net",
-  "username": "abbv20yyFTPabc",
+  "username": "abbv20yyftpFML",
   "password": "PASSWeRD14$$##",
   "context": "./dnn",
   "protocol": "ftp",
