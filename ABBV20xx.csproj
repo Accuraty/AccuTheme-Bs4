@@ -19,6 +19,7 @@
     <BinPath_DNN>$(BinPathRoot)DNN\</BinPath_DNN>
     <BinPath_2SXC>$(BinPathRoot)2sxc\</BinPath_2SXC>
     <BinPath_ACCU>$(BinPathRoot)AccuLadder\</BinPath_ACCU>
+    <!-- unnecessary example of constructing and using the local project path (above) -->
     <!-- <BinPath_2SAC>$(GitHubLocalRoot)$(RootNamespace)\dnn\App_Data\2sxc.bin\</BinPath_2SAC> -->
   </PropertyGroup>
 
