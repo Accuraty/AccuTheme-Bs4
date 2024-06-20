@@ -1,4 +1,4 @@
-<div id="skinAuth" class="dnn-skin-wrapper skin-auth">
+<div id="skin-auth" class="dnn-skin-wrapper skin-auth">
 <!--#include file="includes/_preheader.ascx"-->
 <!--#include file="includes/_header.ascx"-->
 
