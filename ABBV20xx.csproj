@@ -13,28 +13,30 @@
     <!-- $(GitHubLocalRoot)$(RootNamespace)\ << this project should be here (physical path) -->
 
     <!-- C:\dev\dlls\              << this is where the Accuraty shared DLLs should be (copied from A:\dev\dlls to local) -->
-    <BinPathRoot>..\..\..\dev\dlls\</BinPathRoot>
+    <BinPathRoot>C:\dev\dlls\</BinPathRoot>
+
     <!-- DNN DLLs are now managed (below) via NuGet -->
     <BinPath_DNN>$(BinPathRoot)DNN\</BinPath_DNN>
     <BinPath_2SXC>$(BinPathRoot)2sxc\</BinPath_2SXC>
     <BinPath_ACCU>$(BinPathRoot)AccuLadder\</BinPath_ACCU>
-    <BinPath_2SAC>$(GitHubLocalRoot)$(RootNamespace)\dnn\App_Data\2sxc.bin\</BinPath_2SAC>
+    <!-- <BinPath_2SAC>$(GitHubLocalRoot)$(RootNamespace)\dnn\App_Data\2sxc.bin\</BinPath_2SAC> -->
   </PropertyGroup>
 
   <ItemGroup>
     <!-- Tell Visual Studio & VSCode to respect all .* DLLs in the SHARED folder -->
 
-    <!-- <Reference Include="$(BinPath_DNN)v091301\*.dll" /> -->
+    <!-- <Reference Include="$(BinPath_DNN)v091303\*.dll" /> -->
     <!-- DDR Menu is not available from the currently select NuGet managed DNN stuff -->
     <Reference Include="$(BinPath_DNN)v091303\*.DDRMenu.dll" />
 
-    <Reference Include="$(BinPath_2SXC)v1707x\*.dll" />
+    <Reference Include="$(BinPath_2SXC)v1709x\*.dll" />
     <Reference Include="$(BinPath_ACCU)v010009\*.dll" />
     <!-- <Reference Include="$(BinPath_2SAC)*.dll" /> -->
   </ItemGroup>
 
   <ItemGroup>
     <!-- For more project-specific IntelliSense, also load files in the Dependencies folder of the current App -->
+    <!-- a common example used to be adding the EasyDNNnews main API DLL here -->
     <Reference Include="dependencies\*.dll" />
   </ItemGroup>
 
