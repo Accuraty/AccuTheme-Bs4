@@ -1,4 +1,4 @@
-<div id="skinHome" class="dnn-skin-wrapper skin-home">
+<div id="skin-home" class="dnn-skin-wrapper skin-home">
 <!--#include file="includes/_preheader.ascx"-->
 <!--#include file="includes/_header.ascx"-->
 
