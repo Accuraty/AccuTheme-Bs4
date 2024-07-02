@@ -35,7 +35,7 @@
 
   &:not(.is-visible) {
     pointer-events: none;
-    opacity: 0;
+    opacity: 1; //was 0 but would hide entire login module
     transform: translateY(.25rem) scale(.999);
   }
 }
