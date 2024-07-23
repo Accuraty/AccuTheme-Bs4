@@ -42,6 +42,7 @@
           "Write-Host '';",
           "Write-Host 'REQUIRED: NodeJS v20.12.2 (20240506 JRF)' -ForegroundColor Yellow;",
           "nvm list | % { if($_.Contains('*')) { 'NVM SAYS: NodeJS v' + $_.Trim(' *') } } ;",
+          "Write-Host 'Reminder: To switch Node Versions, \"> nvm use vNN.NN.NN \"' -ForegroundColor Magenta;",
           "# ls ; # for subsequent commands"
         ]
       }
