@@ -1,8 +1,18 @@
 # AccuTheme Containers
 
-A **container** is similar to a layout template, except a container's scope is a single pane, whereas a layout template's scope is the entire page. A container is associated with a **module**, which can generate dynamic content or perform other functionality. Containers allow designers to seamlessly integrate modules into a cohesive website design.
+
+**IMPORTANT NOTE:** the CSS for Containers is an AccuTheme Bootstrap component. _This was a new addition in June 2024._
+
+To use, the SCSS file is here: `/src/styles/theme/components/_dnn-containers.scss`. And then make sure your container's output has the expected Class wrapper.
+
+If you want to back-port it, copy that file and also add a line to `/src/styles/Skin.scss`, maybe at the start of the Custom Components section (near Accordion, 
+Nav-Site-Menu, etc) like this, `@import "theme/components/dnn-containers";`
+
+---
 
 ## How are they used?
+
+A **container** is similar to a layout template, except a container's scope is a single pane, whereas a layout template's scope is the entire page. A container is associated with a **module**, which can generate dynamic content or perform other functionality. Containers allow designers to seamlessly integrate modules into a cohesive website design.
 
 In short, containers are applied to modules via their settings. Think of it like giving the module a template, similar to how you apply themes to pages.
 
