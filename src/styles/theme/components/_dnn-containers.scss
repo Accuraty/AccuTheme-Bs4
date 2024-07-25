@@ -1,0 +1,42 @@
+// ============================================================================
+//
+//  [Table of Contents]
+//
+//  - Wrapper and base styles
+//  - Container item
+//
+// ============================================================================
+
+
+//
+// Wrapper and base styles
+// =======================
+
+.dnn-container {
+
+  // ALL CONTAINERS
+
+  // AccuTheme NAMED CONTAINERS
+  // - Disclosure added June 2024
+
+  &.container-disclosure {
+    margin-bottom: 20px;
+
+    /* CLOSED - Style when the details tag is not open */
+    // &:not([open]) {}
+
+    /* OPEN - Style when the details tag is open */
+    &[open] {
+      // > summary {}
+
+      // summary::marker {}
+
+      summary * {
+        display: none;
+      }
+    }
+  }
+
+  // CUSTOM NAMED CONTAINERS - added for this project
+
+}
