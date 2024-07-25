@@ -1,38 +1,69 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <!-- This file helps VS Code provide IntelliSense - see https://go.2sxc.org/vscode -->
+  <!-- Note that this is specific to Accuraty's needs and setup, so quite a few things are different from the 2sxc reference -->
 
   <PropertyGroup>
     <RootNamespace>ABBV20xx</RootNamespace>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget> <!-- future: could this change (for Oqtane)? -->
+  </PropertyGroup>
 
+  <PropertyGroup>
+    <GitHubLocalRoot>C:\GitHubLocal\</GitHubLocalRoot>
+    <!-- this project should be here (physical path) -->
+    <PathProjectRoot>$(GitHubLocalRoot)$(RootNamespace)\</PathProjectRoot> <!-- not in use yet 20240725 JRF -->
+    <!-- this is where the Accuraty shared DLLs should be (copied from A:\dev\dlls to local) -->
+    <PathBinRoot>C:\dev\dlls\</PathBinRoot>
+  </PropertyGroup>
+
+  <!-- 
+  CONDITIONALS ARE NOT IN USE yet, included for future reference 20240725 JRF 
+  https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-conditions 
+  -->
+  <!-- Detect DNN, Oqtane, Production, Staging, Dev, Local, Remote, etc. -->
+  <PropertyGroup>
+    <!-- hard coded these for now -->
+    <RunningInDnn>true</RunningInDnn> 
+    <InstanceIsRemote>true</InstanceIsRemote>
+    <InstanceIsStaging>true</InstanceIsStaging>   
+    <!-- <RunningInDnn Condition="Exists('..\..\..\bin\DotNetNuke.dll')">true</RunningInDnn> -->
+    <!-- for Oqtane examples: see 2sxc Apps on GitHub (News, Mobius, etc.) /app.csproj -->
+  </PropertyGroup>
+
+  <!-- settings for DNN -->
+  <PropertyGroup Condition="'$(RunningInDnn)' == 'true'">
     <!-- https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
     <TargetFramework>net472</TargetFramework>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>12.0</LangVersion> <!-- need to verify this and PolySharp are doing something for us 20240725 JRF -->
+    <!-- DNN DLLs are now managed via NuGet (see below, PackageReference) -->
+    <PathBin_DNN>$(PathBinRoot)DNN\</PathBin_DNN>
+    <!-- AccuLadder is too DNN specific for now or has DNN dependecies? 20240725 JRF -->
+    <PathBin_ACCU>$(PathBinRoot)AccuLadder\</PathBin_ACCU>
+  </PropertyGroup>
 
-    <GitHubLocalRoot>C:\GitHubLocal\</GitHubLocalRoot>
-    <!-- $(GitHubLocalRoot)$(RootNamespace)\ << this project should be here (physical path) -->
-
-    <!-- C:\dev\dlls\              << this is where the Accuraty shared DLLs should be (copied from A:\dev\dlls to local) -->
-    <BinPathRoot>C:\dev\dlls\</BinPathRoot>
-
-    <!-- DNN DLLs are now managed (below) via NuGet -->
-    <BinPath_DNN>$(BinPathRoot)DNN\</BinPath_DNN>
-    <BinPath_2SXC>$(BinPathRoot)2sxc\</BinPath_2SXC>
-    <BinPath_ACCU>$(BinPathRoot)AccuLadder\</BinPath_ACCU>
+  <PropertyGroup>
+    <PathBin_2SXC>$(PathBinRoot)2sxc\</PathBin_2SXC>
     <!-- unnecessary example of constructing and using the local project path (above) -->
-    <!-- <BinPath_2SAC>$(GitHubLocalRoot)$(RootNamespace)\dnn\App_Data\2sxc.bin\</BinPath_2SAC> -->
+    <!-- <PathBin_2SAC>$(GitHubLocalRoot)$(RootNamespace)\dnn\App_Data\2sxc.bin\</PathBin_2SAC> -->
   </PropertyGroup>
 
   <ItemGroup>
     <!-- Tell Visual Studio & VSCode to respect all .* DLLs in the SHARED folder -->
+    <Reference Include="$(PathBin_2SXC)v1709x\*.dll" />
+    <Reference Include="$(PathBin_ACCU)v010009\*.dll" />
+  </ItemGroup>
 
-    <!-- <Reference Include="$(BinPath_DNN)v091303\*.dll" /> -->
+  <!-- IntelliSense: DNN specific -->
+  <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
+    <!-- old way, switched to NuGet in Feb? 2024 -->
+    <!-- <Reference Include="$(PathBin_DNN)v091303\*.dll" /> -->
     <!-- DDR Menu is not available from the currently select NuGet managed DNN stuff -->
-    <Reference Include="$(BinPath_DNN)v091303\*.DDRMenu.dll" />
+    <Reference Include="$(PathBin_DNN)v091303\*.DDRMenu.dll" />
+  </ItemGroup>
 
-    <Reference Include="$(BinPath_2SXC)v1709x\*.dll" />
-    <Reference Include="$(BinPath_ACCU)v010009\*.dll" />
-    <!-- <Reference Include="$(BinPath_2SAC)*.dll" /> -->
+  <!-- These are NOT in the /bin folder but in the .Net Framework installed on local/remote (how to prove?) -->
+  <ItemGroup>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,14 +72,17 @@
     <Reference Include="dependencies\*.dll" />
   </ItemGroup>
 
-  <ItemGroup>
-    <!-- Reminder: Bundle = Core, Instrumentation, FolderProviders, SiteImportExport, Web, Web.Client, Web.Mvc, WebApi
+  <!-- manage NuGet packages -->
+  <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
+    <!-- TODO Match Version with /bin/System.Text.Json.dll after each 2sxc update /bin -->
+    <PackageReference Include="System.Text.Json" Version="8.0.4" /> 
+    <!-- Reminder: DNN Bundle = Core, Instrumentation, FolderProviders, SiteImportExport, Web, Web.Client, Web.Mvc, WebApi
       https://www.nuget.org/packages/DotNetNuke.Bundle#dependencies-body-tab -->
     <PackageReference Include="DotNetNuke.Bundle" Version="9.13.3" />
     <PackageReference Include="DotNetNuke.DependencyInjection" Version="9.13.3" />
     <PackageReference Include="DotNetNuke.Abstractions" Version="9.13.3" />
-    <PackageReference Include="System.Text.Json" Version="8.0.3" /> <!-- DNN+2sxc /bin = v7.0.x -->
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <!-- <PackageReference Include="System.Net.Http" Version="4.3.4" /> --> <!-- already there in .Net Framework -->
+    <!-- https://github.com/Sergio0694/PolySharp -->
     <PackageReference Include="PolySharp" Version="1.14.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
