@@ -14,7 +14,7 @@
 // Wrapper and base class
 // ======================
 
-.dropdown {}
+// .dropdown {}
 
 
 //
@@ -142,9 +142,9 @@
     .dropdown-menu {
       z-index: 1;
 
-      &::after {
+      // &::after {
         // left: 0;
-      }
+      // }
     }
   }
 }
