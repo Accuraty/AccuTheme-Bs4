@@ -29,22 +29,6 @@ Navigate to the directory where you want to store the project, copy the GitHub U
 git clone _GITHUB_URL_HERE_
 ```
 
-**OPTIONAL** - install these Repos if you plan to update them or want the code available locally
-
-- [AccuCode](https://github.com/Accuraty/AccuCode) - AccuKit and other Dnn standard utilities in /App_Code
-- [AccuCUE](https://github.com/Accuraty/AccuCUE) - Accuraty's 2sxc shared assets, utilities, helpers, etc.
-
-Make sure your terminal's CWD (current working directory) is the root of the project (the folder where you just cloned the main project in to), then run the following commands:
-
-```
-git clone https://github.com/Accuraty/AccuCode ./dnn/App_Code
-
-git clone https://github.com/Accuraty/AccuCUE ./dnn/Portals/0/2sxc/Content/Accu
-
-copy .vscode/AccuTheme.gitmodules .gitmodules
-```
---- end of OPTIONAL ---<br>
-
 #### 2. Set your FTP config
 
 If you are using Visual Studio Code, navigate to the `.vscode/` directory. Duplicate `sftp.json.example`, configure it with your credentials, and save it as `sftp.json` to continue.
