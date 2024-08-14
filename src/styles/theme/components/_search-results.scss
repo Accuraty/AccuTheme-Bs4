@@ -1,0 +1,115 @@
+// ============================================================================
+//
+//  [Table of Contents]
+//
+//  - Search Box Panel
+//  - Search Results Panel
+//  - Search Results Pager
+//
+// ============================================================================
+
+
+//  =====================================
+//  Overriding CSS for DNN Search Results
+//  =====================================
+
+
+//  Search Box Panel
+//  ================
+
+.dnnSearchBoxPanel {
+  background-color: white !important;
+
+  .dnnSearchResultAdvancedTip {
+    color: white !important;
+  }
+
+  .dnnSearchBox {
+    border: 2px solid $primary !important;
+    padding: 10px !important;
+    margin-right: 0 !important;
+
+    input#dnnSearchResult_dnnSearchBox_input {
+      left: 14px;
+    }
+
+    a.dnnSearchButton {
+      display: none !important;
+    }
+
+    .dnnSearchBox_advanced {
+      display: none !important;
+    }
+  }
+}
+
+
+//  Search Results Panel
+//  ====================
+
+.dnnSearchResultPanel {
+  margin: 10px 0 0 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  padding: 10px 0;
+  background-color: white !important;
+
+  .dnnRight {
+    margin: 0 10px !important;
+    display: flex !important;
+    align-self: center !important;
+
+    span.dnnSearchResultCountPerPage {
+      margin: 0 5px !important;
+    }
+
+    .selectize-control {
+      bottom: 4px !important;
+    }
+  }
+
+  .dnnSearchResultSortOptions {
+    border: none !important;
+
+    li {
+      padding: 0 !important;
+      border-bottom: none !important;
+
+      a {
+        background: $light !important;
+        color: $dark !important;
+
+        &:hover {
+          background: darken($light, 5%) !important;
+          text-decoration: none !important;
+        }
+      }
+    }
+
+    li.active > a {
+      background: $success !important;
+      color: white !important;
+      margin-bottom: 1rem !important;
+
+      &:hover {
+        background: darken($success, 5%) !important;
+        text-decoration: none !important;
+      }
+    }
+  }
+}
+
+
+//  Search Results Pager
+//  ====================
+
+.dnnSearchResultPager {
+  .dnnRight {
+    span.dnnPager-current {
+      margin: 0 20px 0 0 !important;
+    }
+    a.dnnPager-prev, a.dnnPager-next {
+      margin: 0 !important;
+    }
+  }
+}
