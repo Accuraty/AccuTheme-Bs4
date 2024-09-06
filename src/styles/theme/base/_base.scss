@@ -55,6 +55,7 @@ ol,
 ul,
 dl,
 address {
+  text-wrap: pretty;
 
   &:last-child {
     margin-bottom: 0; // 1
