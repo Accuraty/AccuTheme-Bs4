@@ -1,3 +1,5 @@
+[Node.js Releases](https://nodejs.org/en/about/previous-releases) - we follow the even numbered ones as time goes by. As an example, in Sep 2024 we are still 20.x and (probably a little) late moving to Node v22.x. To see the current version, look in package.json (engines/node).
+
 # AccuTheme-Bs4
 
 Status: no roadmap, fixes and minor improvements from now on. AccuTheme "redux" in the works (20230305 JRF).
