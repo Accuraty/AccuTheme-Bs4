@@ -12,6 +12,7 @@
 //  - Lists
 //  - Blockquote
 //  - Text Wrapping
+//  - Vertical Align
 //
 // ============================================================================
 
@@ -138,4 +139,13 @@ h2,
 //  Used for paragraph text
 .text-pretty {
   text-wrap: pretty;
+}
+
+//
+//  Vertical Align
+//  ==============
+//  Commonly used for Bootstrap Badges
+
+.align-super {
+  vertical-align: super;
 }
