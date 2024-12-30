@@ -29,7 +29,8 @@
     padding: 10px !important;
     margin-right: 0 !important;
 
-    input#dnnSearchResult_dnnSearchBox_input {
+    /* stylelint-disable-next-line selector-id-pattern */
+    #dnnSearchResult_dnnSearchBox_input {
       left: 14px;
     }
 
