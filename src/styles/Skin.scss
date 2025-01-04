@@ -72,7 +72,6 @@
 @import "theme/components/nav";
 @import "theme/components/navbar";
 @import "theme/components/card";
-@import "theme/components/breadcrumb";
 @import "theme/components/pagination";
 @import "theme/components/badge";
 @import "theme/components/jumbotron";
@@ -88,12 +87,13 @@
 @import "theme/components/spinners";
 
 // ... then import custom components ...
+@import "theme/components/dnn-breadcrumb";
 @import "theme/components/dnn-containers";
+@import "theme/components/dnn-search-results";
 @import "theme/components/accordion";
 @import "theme/components/rich-text";
 @import "theme/components/skip-link";
 @import "theme/components/nav-site-menu";
-@import "theme/components/search-results";
 
 @import "theme/layout/footer";
 @import "theme/layout/header";

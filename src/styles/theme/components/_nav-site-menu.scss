@@ -18,7 +18,7 @@
       display: block;
     }
   }
-  
+
   .nav-link {
     color: $white;
     background-color: $link-color;
@@ -29,6 +29,7 @@
   }
 
   // this fix is no longer needed starting DNN ~9.11?
+
   /*
   .personabar-visible & {
     left: calc(#{$dnn-persona-bar-width} + 1rem);
