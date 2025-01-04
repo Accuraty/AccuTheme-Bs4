@@ -18,10 +18,10 @@
 //  ================
 
 .dnnSearchBoxPanel {
-  background-color: white !important;
+  background-color: $white !important;
 
   .dnnSearchResultAdvancedTip {
-    color: white !important;
+    color: $white !important;
   }
 
   .dnnSearchBox {
@@ -53,7 +53,7 @@
   display: flex !important;
   justify-content: flex-end !important;
   padding: 10px 0;
-  background-color: white !important;
+  background-color: $white !important;
 
   .dnnRight {
     margin: 0 10px !important;
@@ -89,7 +89,7 @@
 
     li.active > a {
       background: $success !important;
-      color: white !important;
+      color: $white !important;
       margin-bottom: 1rem !important;
 
       &:hover {
@@ -109,7 +109,8 @@
     span.dnnPager-current {
       margin: 0 20px 0 0 !important;
     }
-    a.dnnPager-prev, a.dnnPager-next {
+    a.dnnPager-prev, 
+    a.dnnPager-next {
       margin: 0 !important;
     }
   }
