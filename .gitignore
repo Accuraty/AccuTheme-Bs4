@@ -59,10 +59,16 @@ obj/
 # 2sxc Content App Generated and app original cs files
 **/Portals/**/2sxc/**/AppCode/**/*.cs
 !**/Portals/**/2sxc/**/AppCode/**/*.Accuraty.cs
+!**/Portals/**/2sxc/**/AppCode/Accu/*.*
+
+# new experimental idea, ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders 
+# because we don't edit these and would never want to check them in
+**/Portals/**/2sxc/**/bs3/
+**/Portals/**/2sxc/**/bs4/
+**/Portals/**/2sxc/**/bs5/
 
 # [to be removed?, we don't do this anymore ] if AccuCode is setup as a separate project (.gitmodules, /App_Code), uncomment this
 # app/App_Code/
-
 # OHS utilities, https://github.com/Accuraty/AccuTheme-2021/issues/47
 # VS Code hack? >>> See notes in .gitmodules file
 .gitmodules
