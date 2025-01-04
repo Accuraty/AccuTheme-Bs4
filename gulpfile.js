@@ -2,9 +2,8 @@
 // otherwise the env global variable might not contain the contents of the .env file.
 import './gulpfileDir/config/envLoader.js';
 
-// How to get around the no named exports from gulp error
-import pkg from 'gulp';
-const { parallel, series } = pkg;
+import gulp from 'gulp';
+const { series, parallel } = gulp;
 
 import { clean } from './gulpfileDir/tasks/clean.js';
 import { copy } from './gulpfileDir/tasks/copy.js';
@@ -30,6 +29,5 @@ export { _styles as styles };
 const _watch = watch;
 export { _watch as watch };
 
-const _default = series(base, compile, [watch]);
-export { _default as default };
 export const build = series(base, lintStyles, compile);
+export default series(base, compile, watch);
