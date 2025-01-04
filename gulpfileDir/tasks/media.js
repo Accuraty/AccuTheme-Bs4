@@ -2,8 +2,6 @@
 import pkg from 'gulp';
 const { src, dest, parallel } = pkg;
 
-import imagemin from 'gulp-imagemin';
-
 import { paths, plugins, project } from '../config/index.js';
 const { fonts, svg } = paths;
 const $ = plugins.imagemin;
@@ -15,14 +13,7 @@ function fontsTask() {
 
 function svgTask() {
   if (!project.svg) return Promise.resolve();
-  return src(svg.src).pipe(imagemin($.plugins, $.options)).pipe(dest(svg.dist));
-}
-
-function imagesTask() {
-  if (!project.images) return Promise.resolve();
-  return src(paths.images.src)
-    .pipe(imagemin($.plugins, $.options))
-    .pipe(dest(paths.images.dist));
+  return src(svg.src).pipe(dest(svg.dist));
 }
 
 function videosTask() {
@@ -30,4 +21,4 @@ function videosTask() {
   return src(paths.videos.src).pipe(dest(paths.videos.dist));
 }
 
-export const media = parallel(fontsTask, svgTask, imagesTask, videosTask);
+export const media = parallel(fontsTask, svgTask, videosTask);

@@ -23,42 +23,6 @@ const autoprefixer = {
 };
 
 /**
- * IMAGEMIN
- * https://github.com/sindresorhus/gulp-imagemin
- */
-import { gifsicle, svgo, mozjpeg } from 'gulp-imagemin';
-import pngquant from 'imagemin-pngquant';
-
-const imagemin = {
-  plugins: [
-    pngquant({
-      speed: 6,
-      quality: [0.7, 1], // lossy settings
-    }),
-    gifsicle({ interlaced: true }),
-    svgo({
-      plugins: [
-        { name: 'cleanupAttrs', active: true },
-        { name: 'cleanupIDs', active: false },
-        { name: 'removeComments', active: true },
-        { name: 'removeDesc', active: false },
-        { name: 'removeStyleElement', active: true },
-        { name: 'removeTitle', active: false },
-        { name: 'removeUnknownsAndDefaults', active: false }, // keeps `role="image"`
-        { name: 'removeViewBox', active: true },
-      ],
-    }),
-    mozjpeg({
-      progressive: true,
-      quality: 75,
-    }),
-  ],
-  options: {
-    verbose: true,
-  },
-};
-
-/**
  * REAL FAVICON GENERATOR
  * https://github.com/RealFaviconGenerator/gulp-real-favicon
  */
@@ -121,4 +85,4 @@ const realFavicon = {
 /**
  * EXPORTS
  */
-export { gulpSass, autoprefixer, imagemin, realFavicon };
+export { gulpSass, autoprefixer, realFavicon };
