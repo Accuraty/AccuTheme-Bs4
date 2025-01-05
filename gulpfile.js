@@ -11,7 +11,8 @@ import { favicons } from './gulpfileDir/tasks/favicons.js';
 import { lintStyles } from './gulpfileDir/tasks/lint.js';
 import { media } from './gulpfileDir/tasks/media.js';
 import { scripts } from './gulpfileDir/tasks/scripts.js';
-import { styles } from './gulpfileDir/tasks/styles.js';
+// import { styles } from './gulpfileDir/tasks/styles.js'; //Original
+import { styles } from './gulpfileDir/tasks/styles--Webpack.js'; //Webpack version
 import { watch } from './gulpfileDir/tasks/watch.js';
 
 const base = series(clean, copy, media);
