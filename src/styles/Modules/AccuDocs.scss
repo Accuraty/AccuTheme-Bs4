@@ -8,9 +8,9 @@
 @import "bootstrap/scss/mixins";
 
 // Custom theme overrides
-@import "theme/functions";
-@import "theme/variables";
-@import "theme/mixins";
+@import "../theme/functions";
+@import "../theme/_variables";
+@import "../theme/_mixins";
 
 
 //
