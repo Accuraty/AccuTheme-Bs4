@@ -4,7 +4,8 @@ const { watch: __watch } = pkg;
 
 import { media as mediaTask } from './media.js';
 
-import { styles, skinStyles, moduleStyles, containerStyles } from './styles.js';
+// import { styles, skinStyles, moduleStyles, containerStyles } from './styles.js'; //Original Gulp version
+import { styles, skinStyles, moduleStyles, containerStyles } from './styles--Webpack.js'; //Swap to webpack version
 import { scripts as scriptsTask } from './scripts.js';
 
 import { paths, project } from '../config/index.js';
