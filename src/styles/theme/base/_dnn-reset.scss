@@ -292,7 +292,7 @@ li {
 }
 
 .dnnFormItem select {
-  @extend select.form-control;
+  @extend .form-control;
 
   option {
     color: $gray-800;
