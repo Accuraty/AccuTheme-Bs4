@@ -54,7 +54,8 @@ export default class App {
       // and log the exception to the console instead of blowing up.
       try {
         options = JSON.parse(optionString);
-      } catch (error) {
+      } catch {
+        // removed 'catch (error)' because it's not used
         const name = component.getAttribute(this.config.componentAttr);
         console.error(`Invalid JSON in "${name}" component options`, {
           name,
