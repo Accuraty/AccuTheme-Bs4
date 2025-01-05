@@ -1,5 +1,7 @@
 # VS Code - GitModules Setup
 
+### *This is no longer needed and can be removed after 20251231 JRF*
+
 This covers how to setup Nested GitHub projects in VS Code. For example, a main (root) project like ASL2022 could have AccuCode (in the dnn/App_Code folder). 
 
 Updated and maintained version is on Accu4.com, [VS Code - GitModules Setup](https://accu4.com/H2R2S/Dev/VS-Code).
