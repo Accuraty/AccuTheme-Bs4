@@ -70,7 +70,7 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-      "webpack.config.js": "webpack.*.config.js",
+      "webpack.config.js": "webpack.*.js",
       "*.code-workspace": ".env, .browserslistrc, .eslint*, .*.json, .git*, .editorconfig, .nvmrc, .*ignore, gulp*.js",
       "README.md": "READ*",
     }
