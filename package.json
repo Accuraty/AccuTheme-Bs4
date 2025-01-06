@@ -18,7 +18,6 @@
     "favicons": "gulp favicons",
     "images": "webpack --config webpack.images.config.js",
     "package": "webpack --config webpack.installer.config.js",
-    "sass": "webpack --config webpack.SCSS.config.js",
     "updateDLLs": "robocopy \"A:\\dev\\dlls\" \"C:\\dev\\dlls\" /MIR /W:5 /R:2 /NJH /NDL",
     "cleanDLLs": "pwsh -Command \"Remove-Item -Path C:\\dev\\dlls -Recurse -Force; Copy-Item -Path A:\\dev\\dlls -Destination C:\\dev\\dlls -Recurse -Force\"",
     "lint:scripts": "eslint --format=pretty --fix",
