@@ -9,9 +9,10 @@
 
 // Custom theme overrides
 @import "../theme/functions";
+/* stylelint-disable scss/load-no-partial-leading-underscore */
 @import "../theme/_variables";
 @import "../theme/_mixins";
-
+/* stylelint-enable scss/load-no-partial-leading-underscore */
 
 //
 // Wrapper and base class
