@@ -3,13 +3,16 @@
 
   >>> UNFINISHED version copied to PDEG, CPHP, CCFP, BEACN, BBIOP, ASL2022, PDPRAPI, CUAM2020, ARPAS2023, RRMA2024
   BUG showDebug is not working as expected due to "scope-confusion", see logDebug below (~line 196)
+    >> un-confusion: https://stackoverflow.com/questions/28573445/script-runat-server-vs
   BUG with details/on or all, the debug output shows but not the details when NOT at an allowed IP
+  TODO need a method (bool) to recognize staging/dev vs. production/live 
   TODO on older projects with old DNN versions, we may need to add add DLLs for System.Text.Json? 
        ? >>> NO, undoing that, we'll use Newtonsoft.Json since its already in DNN v8-9.12, v8.00.04 has v7.0.1
   TODO convert the Key DLLs to a List<string> in DebugSettings and loop through them to GetVersion()s
   TODO synthesise the JsonFileLocations? see notes/ideas in LoadAllowedIps() after if (loc.StartsWith("http")) {
   TODO (started) show DNN security-related settings; PB ... More Security Settings, Show Critical Errors, Debug Mode
   TODO this could be more helpful if there was an ENV or global setting showing if the site is in production (live) or not; e.g. certain settings could become warnings
+  DONE update WebClient() to System.Net.Http.HttpClient() (async/await) for LoadAllowedIps()
   DONE with Session and Persistence, show whether or not DNN has Enable Remember on or off (Security/More)
   ? "DebugSettings" is a bad name, maybe "DebugInfo" or "DebugDetails" or "DebugOutput" 
 
@@ -39,16 +42,24 @@
   **/
 --%>
 <script runat="server">
-  // STEP 0: add file to theme/includes/, then add to footer.ascx and test (missing DLLs?)
+  // STEP 0.0: add this file to theme/includes/, then add to footer.ascx and test (missing DLLs?)
 
+  // STEP 0.5: set these environment values to match your site/theme/etc
+  const string ENV_ThemeNameRoot = "AccuTheme"; // the name of the theme
+  const string ENV_ThemeFlavor = "Bs4"; // the flavor of the theme (GitHub repo suffix)
+  const string ENV_ThemeFlavorVersion = "4.6.2"; // the version of Bootstrap used
+  
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
-  const string debugVersion = "2023.07.29-prerelease";
+  const bool showAllForSuper = true; // show all details and debug for SuperUsers
+  const string debugVersion = "WIP.2024.01.06";
+
+  string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 
   // STEP 1: UPDATE THESE VALUES TO MATCH YOUR SITE AND ENVIRONMENT (then delete this comment)
   public partial class DebugSettings // ? rename to DebugDetails or ??
   {
-    public static string BootstrapVersion = "4.6.2"; // set this to match actual (usually via package.json)
+    public static string BootstrapVersion = ENV_ThemeFlavorVersion; // set this to match actual (usually via package.json)
     // final fallback list if remote/local locations fail
     public static List<string> AllowedIpsListFallback = new List<string> { 
       "127.0.0.1", 
@@ -79,20 +90,75 @@
 <% 
   bool showDetails = isIpSpecial() 
     || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlOutputValue)
-    || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlAllValue);
+    || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlAllValue)
+    || currUserInfo().IsSuperUser && showAllForSuper
+  ;
   bool showDebug = isDebug
     || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlDebugValue)
-    || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlAllValue);
+    || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlAllValue)
+    || currUserInfo().IsSuperUser && showAllForSuper
+  ;
 
   if ( showDetails ) { 
+
+    //get the TabPermission for the current tab and cast from Collection to List<TabPermissionInfo>
+    List<DotNetNuke.Security.Permissions.TabPermissionInfo> tabPermissionInfo = 
+      DotNetNuke.Security.Permissions.TabPermissionController.GetTabPermissions(PortalSettings.ActiveTab.TabID , PortalSettings.PortalId)
+        .Cast<DotNetNuke.Security.Permissions.TabPermissionInfo>()
+          .ToList()
+    ;
+
+    //loop all the permissionInfo objects and check for RoleId -1 (= all users)
+    bool allUsers = false;
+    foreach (DotNetNuke.Security.Permissions.TabPermissionInfo pi in tabPermissionInfo)
+    {
+        if (pi.RoleID == -1)
+        {
+            allUsers = true;
+        }
+
+        //for visualization of all roles and id's for current tab
+        debugOutput.AppendLine($"Role ID/Name: {pi.RoleID}/{pi.RoleName}, KeyID: {pi.KeyID}, TabID: {pi.TabID}, PermissionID: {pi.PermissionID}, AllowAccess: {pi.AllowAccess}");
+    }
+
+    // is the current page public?
+    int allUsersRoleId2 = int.Parse(DotNetNuke.Common.Globals.glbRoleAllUsers); 
+    int portalId2 = PortalSettings.PortalId;
+    bool IsPublic2 = DotNetNuke.Security.Permissions.TabPermissionController
+      .GetTabPermissions(PortalSettings.ActiveTab.TabID, portalId2)
+        .ToList()
+        .Any(pi => pi.RoleID == allUsersRoleId2 && pi.AllowAccess && pi.PermissionID == 3); // SYSTEM_TAB, VIEW
+
+    debugOutput.AppendLine("--------------------");
+    debugOutput.AppendLine($"IsPublic2: {IsPublic2}, AllUsers: {allUsers}");
+    debugOutput.AppendLine($"allUsersRoleId2: {allUsersRoleId2}");
+    debugOutput.AppendLine($"portalId2: {portalId2}");
+
+    // is the current page public?
+    // retry using PortalSettings.ActiveTab.TabPermissions
+    int allUsersRoleId = int.Parse(DotNetNuke.Common.Globals.glbRoleAllUsers); 
+    bool IsPublic = PortalSettings.ActiveTab
+      .TabPermissions.Cast<DotNetNuke.Security.Permissions.TabPermissionInfo>()
+        .Any(pi => pi.RoleID == allUsersRoleId 
+          && pi.AllowAccess 
+          && pi.PermissionID == 3 // 3 is SYSTEM_TAB, VIEW
+        )
+    ; 
+    debugOutput.AppendLine("--------------------");
+    debugOutput.AppendLine($"IsPublic: {IsPublic}");
+    debugOutput.AppendLine($"allUsersRoleId: {allUsersRoleId}");
+
+    
+
+
 %>
-  <div class="alert alert-warning m-0 text-monospace d-none d-lg-block d-print-none" role="alert">
+  <div class="alert alert-warning m-0 text-monospace d-print-none" role="alert">
     <%-- DNN / HOST --%>
     <div class="mb-2">
       <p>
         DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> / <%=System.Environment.Version.ToString() %> / Host=<%=System.Net.Dns.GetHostName() %>, 
-        DebugMode: <%=DotNetNuke.Entities.Host.Host.DebugMode.ToString() %>, 
-        ShowCriticalErrors: <%=DotNetNuke.Entities.Host.Host.ShowCriticalErrors.ToString() %>
+        DebugMode: <%=IconToggle(DotNetNuke.Entities.Host.Host.DebugMode, "xl") %>, 
+        ShowCriticalErrors: <%=IconToggle(DotNetNuke.Entities.Host.Host.ShowCriticalErrors, "xl") %>
       </p>
     </div>
 
@@ -103,13 +169,14 @@
         Layout / Container: <span title="<%=PortalSettings.DefaultPortalSkin %>"><%=System.IO.Path.GetFileNameWithoutExtension(PortalSettings.DefaultPortalSkin) %></span>
           / <span title="<%=PortalSettings.ActiveTab.ContainerSrc %>"><%=System.IO.Path.GetFileNameWithoutExtension(PortalSettings.ActiveTab.ContainerSrc) %></span>, 
         Bootstrap=<span title="no plans to upgrade Bootstrap to v5 - 202108 JRF">v<%=DebugSettings.BootstrapVersion %></span>
-        <a href="https://github.com/Accuraty/AccuTheme-2021/tree/main/src/styles#bootstrap" target="_blank" rel="noopener noreferrer" class="ml-1">(read me)</a>
+        <a href="https://github.com/Accuraty/<%=ENV_Theme_GitHubRepo %>/tree/main/src/styles#bootstrap" target="_blank" rel="noopener noreferrer" class="ml-1">(read me)</a>
       </p>
     </div>
 
     <%-- PAGE --%>
     <div class="mb-2">
-      <p class="mb-1">Page: TabID=<%=PortalSettings.ActiveTab.TabID %>, 
+      <p class="mb-1"><%=IconPagePublic() %> Page: 
+        ID=<%=PortalSettings.ActiveTab.TabID %>, 
         Name=<%=PortalSettings.ActiveTab.TabName %>, 
         Title=<%=PortalSettings.ActiveTab.Title %>, 
         Layout / Container: <span title="<%=PortalSettings.ActiveTab.SkinSrc %>"><%=System.IO.Path.GetFileNameWithoutExtension(PortalSettings.ActiveTab.SkinSrc) %></span>
@@ -117,13 +184,13 @@
       </p>
       <div class="px-3">
         <div class="mb-0">Status: 
-          <span title="Display in Menus, Navigation">IsVisible=<%=PortalSettings.ActiveTab.IsVisible %>, </span>  
-          <span>Published=<%=PortalSettings.ActiveTab.HasBeenPublished %> </span>
+          <span title="Display in Menus, Navigation">IsVisible <%=IconToggle(PortalSettings.ActiveTab.IsVisible, "lg") %>, </span>  
+          <span>Published <%=IconToggle(PortalSettings.ActiveTab.HasBeenPublished, "lg") %> </span>
         </div>
         <p class="mb-0 text-break">
           Nav: Level=<%=PortalSettings.ActiveTab.Level %>, 
           Path=<%=PortalSettings.ActiveTab.TabPath %>, 
-          <span title="Disabled in Nav/Menus (e.g. not a link, just a parent)">DisableLink=<%=PortalSettings.ActiveTab.DisableLink %> </span>
+          <span title="Disabled in Nav/Menus (e.g. not a link, just a parent)">DisableLink <%=IconToggle(PortalSettings.ActiveTab.DisableLink, "lg") %> </span>
         </p>
         <p class="mb-0" title="What? You didn't know that tabid and language are always there?">QueryString pairs: <%=Request.QueryString.ToString().Replace("&",", ") %></p>
       </div>
@@ -131,7 +198,7 @@
 
     <%-- DLLs --%>
     <div class="mb-2">
-      <p title="These versions are coming from the DLLs in /bin (using Reflection)">Key DLL Versions: 
+      <p title="AssemblyVersion: these versions are coming from the DLLs in /bin (using Reflection)">Key DLL Versions: 
         DNN: <%=GetVersion("DotNetNuke") %>, 
         MS DI: <%=GetVersion("Microsoft.Extensions.DependencyInjection") %>, 
         NewtonsoftJson: <%=GetVersion("Newtonsoft.Json") %>, 
@@ -188,7 +255,7 @@
 
 <% if ( showDebug ) { %>
 <div style="margin:0;padding:1rem;background-color:lightgray;">
-<p style="font-size:larger;font-weight:bold;">DEBUGGING OUTPUT (showDebug is true, isDebug is <%=isDebug %>), WAN IP: <%=GetIpAddress() %></p>
+<p style="font-size:larger;font-weight:bold;">DEBUGGING OUTPUT (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>), WAN IP: <%=GetIpAddress() %></p>
 <pre>
 debugOutput:
 <%=debugOutput.ToString().Trim() %>
@@ -209,12 +276,44 @@ GetIpAddress():                   <%=GetIpAddress() %>
 <script runat="server">
   // set whether to logDebug or not
   bool logDebug = isDebug;
-<%-- 
+  <%-- 
   BUG fix this, throws error due to scope of showDebug, etc.
   logDebug = logDebug 
     || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlDebugValue)
-    || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlAllValue);
---%>  
+    || isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlAllValue)
+  ;
+  --%>  
+  /// <summary>Is the current page public?</summary>
+  /// <returns>bool</returns>
+  bool IsPublic() {
+    int allUsersRoleId = int.Parse(DotNetNuke.Common.Globals.glbRoleAllUsers); 
+    return PortalSettings.ActiveTab
+      .TabPermissions.Cast<DotNetNuke.Security.Permissions.TabPermissionInfo>()
+        .Any(pi => pi.RoleID == allUsersRoleId 
+          && pi.AllowAccess 
+          && pi.PermissionID == 3 // 3 is SYSTEM_TAB, VIEW
+        )
+    ;  
+  }
+  // Get the icon for the page (public or not)
+  string IconPagePublic() {
+    if ( !HttpContext.Current.User.Identity.IsAuthenticated ) { return ""; }
+    bool isPublic = IsPublic();
+    string icon = "<i class=\"fa-solid fa-lock{0}\" title=\"{1}\"></i>";
+    return string.Format(icon, 
+      isPublic ? "-open" : "", 
+      isPublic ? "Public - page permissions allow All Users to View, so unauthenticated users can see this page" : "Private - page is NOT visible to unauthenticated users"
+    );
+  }
+  // Get the toggle on/off icon for boolean
+  string IconToggle(bool isOn, string reSize = "") {
+    string icon = "<i class=\"fa-solid fa-toggle-{0}{2}\" title=\"{1}\"></i>";
+    return string.Format(icon, 
+      isOn ? "on" : "off", 
+      isOn ? "on" : "off",
+      reSize == string.Empty ? "" : " fa-" + reSize
+    );
+  }
   // Get the version of an installed DLL in /bin
   // expecting "ToSic.Razor" and we assume /bin and add .dll
   string GetVersion(string pathFile) {
@@ -370,7 +469,8 @@ GetIpAddress():                   <%=GetIpAddress() %>
       }
 
       // URL or Local path/file?
-      if (loc.StartsWith("http")) {
+      if (loc.StartsWith("http", System.StringComparison.OrdinalIgnoreCase))
+      {
         // IDEA should we try as-is first, then start mucking around?
         // is the filename included? No, so add JsonDefaultFilename
         // does the filename have an extension? No, so add "/" + JsonDefaultFilename
@@ -378,17 +478,23 @@ GetIpAddress():                   <%=GetIpAddress() %>
         /// var afile = System.IO.Path.GetFileName(loc);
         /// if (logDebug) debugOutput.Append("[ filename: " + afile + ", " + (afile == string.Empty).ToString() + " ]");
         bool retry = false;
-        try {
-          // try to get the JSON from the URL
-          using (var client = new System.Net.WebClient()) {
-            rawJson = client.DownloadString(loc);
+        try
+        {
+          rawJson = DownloadJson(loc);
+          if (string.IsNullOrEmpty(rawJson))
+          {
+            if (logDebug) debugOutput.AppendLine(" << URL returned empty response");
+            continue;
           }
-        } catch (Exception ex) {
-          // if we got an error, log it and try the next URL
+        }
+        catch (System.Exception ex)
+        {
           if (logDebug) debugOutput.AppendLine(string.Format(" << URL FAILED: {0}", ex.Message));
           continue;
         }
-      } else {
+      }
+      else 
+      {
         // Local path/file
         try {
           // try to get the JSON from the local file
@@ -542,30 +648,38 @@ GetIpAddress():                   <%=GetIpAddress() %>
     return sb.ToString().TrimEnd(new char[] { ',', ' ' });
   }
 
-  // IDEA we are NOT using this... BUT should we convert and do it this way with task/await?
-  <%-- 
-  public async System.Threading.Tasks.Task<List<string>> GetAllowedIpsAsync(string url)
+  // Add at class level
+  private static readonly System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
+
+  // Synchronous wrapper method for DownloadJsonAsync
+  private string DownloadJson(string url)
   {
-    using (System.Net.Http.HttpClient client = new System.Net.Http.HttpClient())
+      return System.Threading.Tasks.Task.Run(() => 
+          DownloadJsonAsync(url)).GetAwaiter().GetResult();
+  }  
+
+  // Replace WebClient code with these methods
+  private async System.Threading.Tasks.Task<string> DownloadJsonAsync(string url)
+  {
+    try
     {
-      System.Net.Http.HttpResponseMessage response = await client.GetAsync(url);
+      System.Net.Http.HttpResponseMessage response = await httpClient
+        .GetAsync(url)
+        .ConfigureAwait(false);
+      
       response.EnsureSuccessStatusCode();
-      string jsonString = await response.Content.ReadAsStringAsync();
-
-      using (System.Text.Json.JsonDocument document = System.Text.Json.JsonDocument.Parse(jsonString))
+      return await response.Content
+        .ReadAsStringAsync()
+        .ConfigureAwait(false);
+    }
+    catch (System.Exception ex)
+    {
+      if (isDebug) 
       {
-        System.Text.Json.JsonElement root = document.RootElement;
-        System.Text.Json.JsonElement allowedIpsElement = root.GetProperty("allowedIps");
-
-        List<string> allowedIps = new List<string>();
-        foreach (System.Text.Json.JsonElement ipElement in allowedIpsElement.EnumerateArray())
-        {
-          allowedIps.Add(ipElement.GetString());
-        }
-
-        return allowedIps;
+        debugOutput.AppendLine(string.Format("Error downloading JSON from {0}: {1}", url, ex.Message));
       }
+      return string.Empty;
     }
   }
-   --%>
+
 </script>
