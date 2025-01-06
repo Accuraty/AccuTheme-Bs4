@@ -13,10 +13,15 @@ const dnnThemeDestPath = 'dnn/Portals/_default/Skins';
 const imageFiles = globSync('images/**/*.{png,jpg,jpeg,gif}', { cwd: './src/media' }).map(file => `./${file}`);
 const svgFiles = globSync('svg/**/*.svg', { cwd: './src/media' }).map(file => `./${file}`);
 
+// Run custom script first
+import './webpack.images.info.js';
+
 export default {
   mode: 'production',
   context: resolve(__dirname, 'src/media'),
-  entry: [...imageFiles, ...svgFiles],
+  entry: {
+    images: [...imageFiles, ...svgFiles]
+  },
   output: {
     path: resolve(__dirname, dnnThemeDestPath, 'dist/media'),
     clean: true
