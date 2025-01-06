@@ -51,8 +51,8 @@
   
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
-  const bool showAllForSuper = true; // show all details and debug for SuperUsers
-  const string debugVersion = "WIP.2024.01.06";
+  const bool showAllForSuper = true; / show all details and debug for SuperUsers
+  const string debugVersion = "WIP.2025.01.06";
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 
