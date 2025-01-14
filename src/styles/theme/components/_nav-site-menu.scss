@@ -13,7 +13,7 @@
 
   // Nested dropdowns, when the site menu is not
   // included with the `NavMenu` JS component.
-  &:not(.dropdown--hoverable) {
+  &:not(.dropdown-hoverable) {
     .dropdown-menu.show .dropdown:hover .dropdown-menu {
       display: block;
     }
