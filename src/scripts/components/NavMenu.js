@@ -6,7 +6,7 @@ export default class NavMenu {
     dropdown: '.dropdown',
     dropdownMenuItem: '.dropdown-item',
     dropdownOnHover: true,
-    dropdownOnHoverClass: 'dropdown--hoverable',
+    dropdownOnHoverClass: 'dropdown-hoverable',
     dropdownToggle: '.dropdown-toggle',
   };
 

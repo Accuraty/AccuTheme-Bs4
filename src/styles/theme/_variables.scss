@@ -116,6 +116,7 @@ $youtube-primary:       #f00;
 // Font family, size, weight, and line height for body text, headings, etc.
 // ----------------------------------------------------------------------------
 
+// stylelint must wrap lines 121-123 because the auto formatting removed the capitals on the white font families. 20250114 BEM
 /* stylelint-disable */
 $accu-font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $accu-font-family-serif: "Georgia", "Times New Roman", "Times", serif;
