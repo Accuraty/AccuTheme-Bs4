@@ -66,7 +66,7 @@ export const favicons = {
   src: `${srcPath}/${imagesDir}/${faviconFile}`,
   dist: `${distPath}/${imagesDir}`,
   // Note: Absolute path is needed for Real Favicon Generator.
-  iconsPath: `/Portals/_default/Skins/${name}/${DIST_NAME}/${imagesDir}`,
+  iconsPath: `/Portals/_default/Skins/${name}/${DIST_NAME}/${imagesDir}/`,
   markupOutput: `${skinPath}/controls/meta.ascx`,
   markupOutputDirectory: `${skinPath}/controls`,
 };
