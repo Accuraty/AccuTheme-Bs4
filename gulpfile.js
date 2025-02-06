@@ -8,7 +8,8 @@ const { series, parallel } = gulp;
 import { clean } from './gulpfileDir/tasks/clean.js';
 import { copy } from './gulpfileDir/tasks/copy.js';
 import { favicons } from './gulpfileDir/tasks/favicons.js';
-import { lintStyles } from './gulpfileDir/tasks/lint.js';
+// import { lintStyles } from './gulpfileDir/tasks/lint.js';
+import { lintStyles } from './gulpfileDir/tasks/lint--webpack.js';
 import { media } from './gulpfileDir/tasks/media.js';
 import { scripts } from './gulpfileDir/tasks/scripts.js';
 // import { styles } from './gulpfileDir/tasks/styles.js'; //Original
@@ -29,6 +30,8 @@ const _styles = styles;
 export { _styles as styles };
 const _watch = watch;
 export { _watch as watch };
+const _lintStyles = lintStyles;
+export { _lintStyles as lintStyles };
 
 export const build = series(base, lintStyles, compile);
 export default series(base, compile, watch);

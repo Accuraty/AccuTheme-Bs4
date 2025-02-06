@@ -1,0 +1,1 @@
+// Empty file to use that the entry point for webpack when only wanting plugins to run without any files being created.  This is used for "import StylelintPlugin from 'stylelint-webpack-plugin';"

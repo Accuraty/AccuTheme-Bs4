@@ -73,6 +73,7 @@ export const favicons = {
 export const styles = {
   dir: stylesDir,
   src: `${srcPath}/${stylesDir}/**/*.scss`,
+  srcDir: `${srcPath}/${stylesDir}`,
   dist: distPath,
 };
 export const skinStyles = {
