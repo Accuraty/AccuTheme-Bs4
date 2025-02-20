@@ -7,9 +7,14 @@ import WEBPACK_CONFIGS from '../../webpack.stylelint.config.js';
 
 function lintStyles() {
   if (!project.styles) return Promise.resolve();
-  return new Promise(resolve => {
-      webpack(WEBPACK_CONFIGS, (err, stats) => {
-        if (err) console.log('Webpack', err);
+  return new Promise((resolve, reject) => {
+      webpack(WEBPACK_CONFIGS, (error, stats) => {
+        if(error || stats.hasErrors())
+        {
+          let err = error ?? stats.compilation.errors;
+          reject(new Error(`Webpack Stylelint Error: ${err}`));
+          return;
+        }
         resolve();
       });
     });
