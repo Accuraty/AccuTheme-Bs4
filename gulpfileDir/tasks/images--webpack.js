@@ -2,17 +2,15 @@
 // import pkg from 'gulp';
 // const { src, dest } = pkg;
 import webpack from 'webpack';
-import { project } from '../config/index.js';
-import WEBPACK_CONFIGS from '../../webpack.stylelint.config.js';
+import WEBPACK_CONFIGS from '../../webpack.images.config.js';
 
-function lintStyles() {
-  if (!project.styles) return Promise.resolve();
+function images() {
   return new Promise((resolve, reject) => {
       webpack(WEBPACK_CONFIGS, (error, stats) => {
         if(error || stats.hasErrors())
         {
           let err = error ?? stats.compilation.errors;
-          reject(new Error(`Webpack Stylelint Error: ${err}`));
+          reject(new Error(`Webpack Images Error: ${err}`));
           return;
         }
         resolve();
@@ -20,5 +18,5 @@ function lintStyles() {
     });
 }
 
-const _lintStyles = lintStyles;
-export { _lintStyles as lintStyles };
+const _images = images;
+export { _images as images };
