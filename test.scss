@@ -46,9 +46,10 @@
 // Header
 // ======
 
-                                        .auth-form__header {
+                                                .auth-form__header {
 
   h2 {
+
     @include font-size(1.75rem);
   }
 
