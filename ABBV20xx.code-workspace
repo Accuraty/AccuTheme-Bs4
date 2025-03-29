@@ -21,7 +21,9 @@
     "files.associations": {
       ".eslintrc": "json",
       ".prettierrc": "json",
-      ".stylelintrc": "json"
+      ".stylelintrc": "json",
+      ".config": "xml",
+      ".dnn": "xml",
     },
     "html.format.enable": true,
     "editor.tabSize": 2,
