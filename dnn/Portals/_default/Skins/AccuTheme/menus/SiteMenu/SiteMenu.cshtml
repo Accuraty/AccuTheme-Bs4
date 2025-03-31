@@ -3,6 +3,18 @@
 @inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
 
 @functions {
+  //  Copied from NavPrimary, adding the link target element
+  //  =====================
+  private HtmlString buildTargetAttribute(MenuNode node) {
+    var target = node.Target;
+    var targetString = !String.IsNullOrEmpty(target) ? ("target=\"" + target + "\"") : ""; // 1
+
+    if (target == "_blank") {
+      targetString += " rel=\"noopener noreferrer\""; // 2
+    }
+
+    return new HtmlString(targetString);
+  }
 
   /*
     Dropdown attributes
@@ -61,10 +73,11 @@
         var itemCss = String.Join(" ", itemClasses);
         var linkCss = String.Join(" ", linkClasses);
         var linkHref = child.Enabled ? child.Url : "#";
+        var targetAttributes = buildTargetAttribute(child);
         var dropdownAttributes = buildDropdownAttributes(child);
 
         <li id="tab-@child.TabId" class="@itemCss">
-          <a class="@linkCss" href="@linkHref" @dropdownAttributes>@child.Text</a>
+          <a class="@linkCss" href="@linkHref" @targetAttributes @dropdownAttributes>@child.Text</a>
           @RenderChildren(child)
         </li>
       }
