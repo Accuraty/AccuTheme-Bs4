@@ -1,7 +1,7 @@
 <%-- Moved all notes/planning to __debug-README.ascx 
      Reminder: do not use string interpolation 
 --%>
-<script runat="server">
+<script runat="server"> 
   // STEP 1.0: add this file to theme/includes/, then add to footer.ascx and test 
 
   // STEP 1.1: set these environment values to match your site/theme/etc
@@ -12,7 +12,7 @@
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
   const bool showAllForSuper = true; // show all details and debug for SuperUsers
-  const string debugVersion = "WIP.2025.01.21";
+  const string debugVersion = "WIP.2025.01.22";
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 
@@ -49,6 +49,8 @@
 </script>
 
 <% 
+  var robotsStatus = IsWebsiteHiddenFromSearchEngines();
+
   // Check for details/off first
   if (isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlOffValue)) {
     return;
@@ -156,6 +158,9 @@
           <span title="Disabled in Nav/Menus (e.g. not a link, just a parent)">DisableLink <%=IconToggle(PortalSettings.ActiveTab.DisableLink, "lg") %> </span>
         </p>
         <p class="mb-0" title="What? You didn't know that tabid and language are always there?">QueryString pairs: <%=Request.QueryString.ToString().Replace("&",", ") %></p>
+        <p>
+          <strong>Search Engines: <%=robotsStatus.IsHidden ? "Hidden" : "Visible" %></strong> (robots.txt <%=robotsStatus.IsMissing ? "not found" : "exists" %>) 
+        </p>
       </div>
     </div>
 
@@ -490,6 +495,7 @@ GetIpAddress():                   <%=GetIpAddress() %>
         }
       }
     }
+
     if (logDebug) debugOutput.AppendLine("LoadAllowedIps() foreach loop completed");
     // if we got here, we have a list of allowed IPs, or an empty list
     if (allowedIps.Count > 0)
@@ -593,6 +599,7 @@ GetIpAddress():                   <%=GetIpAddress() %>
     }
     return _userInfo;
   }
+
   public string currUserRoles()
   {
     StringBuilder sb = new StringBuilder();
@@ -642,6 +649,61 @@ GetIpAddress():                   <%=GetIpAddress() %>
         debugOutput.AppendLine(string.Format("Error downloading JSON from {0}: {1}", url, ex.Message));
       }
       return string.Empty;
+    }
+  }
+
+  // Custom return type for IsWebsiteHiddenFromSearchEngines() below
+  public class RobotsStatus
+  {
+    public bool IsHidden { get; set; }
+    public bool IsMissing { get; set; }
+  }
+
+  /// <summary>Is the website hidden from search engines?</summary>
+  /// <returns>RobotsStatus: .IsHidden?, IsMissing? (/robots.txt file)</returns>
+  private RobotsStatus IsWebsiteHiddenFromSearchEngines()
+  {
+    try
+    {
+      string robotsPath = Server.MapPath("/robots.txt");
+      if (!System.IO.File.Exists(robotsPath))
+        return new RobotsStatus { IsHidden = false, IsMissing = true };
+
+      bool foundUserAgent = false;
+      
+      foreach (string line in System.IO.File.ReadLines(robotsPath))
+      {
+        string trimmedLine = line.Trim().ToLower();
+        
+        if (trimmedLine.StartsWith("user-agent:") && trimmedLine.Contains("*"))
+        {
+          foundUserAgent = true;
+          continue;
+        }
+        
+        if (foundUserAgent && trimmedLine.StartsWith("disallow:")) // && trimmedLine.Contains("/")
+        {
+          // debugOutput.AppendLine(string.Format("Line: {0}", trimmedLine));
+          string disallowedPath = trimmedLine.Substring(9).Trim();
+          // debugOutput.AppendLine(string.Format("disallowedPath: {0}", disallowedPath));
+          if (disallowedPath == "/")
+          {
+            return new RobotsStatus { IsHidden = true, IsMissing = false };
+          }
+        }
+        
+        if (foundUserAgent && trimmedLine.StartsWith("user-agent:"))
+        {
+          foundUserAgent = false;
+        }
+      }
+      
+      return new RobotsStatus { IsHidden = false, IsMissing = false };
+    }
+    catch (System.Exception ex)
+    {
+      if (isDebug) debugOutput.AppendLine(string.Format("Error reading robots.txt: {0}", ex.Message));
+      return new RobotsStatus { IsHidden = false, IsMissing = true };
     }
   }
 
