@@ -1,7 +1,7 @@
 <%-- Moved all notes/planning to __debug-README.ascx 
      Reminder: do not use string interpolation 
 --%>
-<script runat="server">
+<script runat="server"> 
   // STEP 1.0: add this file to theme/includes/, then add to footer.ascx and test 
 
   // STEP 1.1: set these environment values to match your site/theme/etc
@@ -12,7 +12,7 @@
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
   const bool showAllForSuper = true; // show all details and debug for SuperUsers
-  const string debugVersion = "WIP.2025.01.21";
+  const string debugVersion = "WIP 2025.05.10 << WIP.2025.01.22";
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 
@@ -49,6 +49,8 @@
 </script>
 
 <% 
+  var robotsStatus = IsWebsiteHiddenFromSearchEngines();
+
   // Check for details/off first
   if (isUrlSpecial(DebugSettings.SpecialUrlOutputName, DebugSettings.SpecialUrlOffValue)) {
     return;
@@ -115,11 +117,23 @@
     debugOutput.AppendLine($"allUsersRoleId: {allUsersRoleId}");
 %>
 
+<details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:#fff7de;">
+  <summary>
+    <h6 style="display:inline-block;">
+      Page Id: <%=PortalSettings.ActiveTab.TabID %> - 
+      DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> 
+      w 2sxc <%=GetVersion("ToSic.Sxc") %> 
+      on <%=System.Net.Dns.GetHostName() %> (<%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>)
+      from WAN IP: <%=GetIpAddress() %>
+    </h6>
+  </summary>
+
   <div class="alert alert-warning m-0 text-monospace d-print-none" role="alert">
+
     <%-- DNN / HOST --%>
     <div class="mb-2">
       <p>
-        DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> / <%=System.Environment.Version.ToString() %> / Host=<%=System.Net.Dns.GetHostName() %>, 
+        .NET CLR: <%=System.Environment.Version.ToString() %> <%=System.Net.Dns.GetHostName() %>, 
         DebugMode: <%=IconToggle(DotNetNuke.Entities.Host.Host.DebugMode, "xl") %>, 
         ShowCriticalErrors: <%=IconToggle(DotNetNuke.Entities.Host.Host.ShowCriticalErrors, "xl") %>
       </p>
@@ -156,6 +170,9 @@
           <span title="Disabled in Nav/Menus (e.g. not a link, just a parent)">DisableLink <%=IconToggle(PortalSettings.ActiveTab.DisableLink, "lg") %> </span>
         </p>
         <p class="mb-0" title="What? You didn't know that tabid and language are always there?">QueryString pairs: <%=Request.QueryString.ToString().Replace("&",", ") %></p>
+        <p>
+          <strong>Search Engines: <%=robotsStatus.IsHidden ? "Hidden" : "Visible" %></strong> (robots.txt <%=robotsStatus.IsMissing ? "not found" : "exists" %>) 
+        </p>
       </div>
     </div>
 
@@ -214,26 +231,34 @@
     </p>
 
   </div>
+</details>
 <% } %>
 
 <% if ( showDebug ) { %>
-<div style="margin:0;padding:1rem;background-color:lightgray;">
-<p style="font-size:larger;font-weight:bold;">DEBUGGING OUTPUT (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>), WAN IP: <%=GetIpAddress() %></p>
-<pre>
-debugOutput:
-<%=debugOutput.ToString().Trim() %>
+<details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:lightgray;">
+  <summary>
+    <h6 style="display:inline-block;">
+      DEBUGGING OUTPUT (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>)
+    </h6>
+  </summary>
 
-HttpContext
-.Current.Request.IsLocal:         <%=HttpContext.Current.Request.IsLocal %>
-.UserHostAddress:                 <%=HttpContext.Current.Request.UserHostAddress %>
-.ServerVariables["LOCAL_ADDR"]:   <%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>
-.ServerVariables["REMOTE_ADDR"]:  <%=HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] %>
-.Headers["CF-Connecting-IP"]:     <%=HttpContext.Current.Request.Headers["CF-Connecting-IP"] %>
-.Headers["X-Forwarded-For"]:      <%=HttpContext.Current.Request.Headers["X-Forwarded-For"] %>
+  <div>
+  <pre>
+  debugOutput:
+  <%=debugOutput.ToString().Trim() %>
 
-GetIpAddress():                   <%=GetIpAddress() %>
-</pre>
-</div>
+  HttpContext
+  .Current.Request.IsLocal:         <%=HttpContext.Current.Request.IsLocal %>
+  .UserHostAddress:                 <%=HttpContext.Current.Request.UserHostAddress %>
+  .ServerVariables["LOCAL_ADDR"]:   <%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>
+  .ServerVariables["REMOTE_ADDR"]:  <%=HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] %>
+  .Headers["CF-Connecting-IP"]:     <%=HttpContext.Current.Request.Headers["CF-Connecting-IP"] %>
+  .Headers["X-Forwarded-For"]:      <%=HttpContext.Current.Request.Headers["X-Forwarded-For"] %>
+
+  GetIpAddress():                   <%=GetIpAddress() %>
+  </pre>
+  </div>
+</details>
 <% } %>
 
 <script runat="server">
@@ -490,6 +515,7 @@ GetIpAddress():                   <%=GetIpAddress() %>
         }
       }
     }
+
     if (logDebug) debugOutput.AppendLine("LoadAllowedIps() foreach loop completed");
     // if we got here, we have a list of allowed IPs, or an empty list
     if (allowedIps.Count > 0)
@@ -593,6 +619,7 @@ GetIpAddress():                   <%=GetIpAddress() %>
     }
     return _userInfo;
   }
+
   public string currUserRoles()
   {
     StringBuilder sb = new StringBuilder();
@@ -642,6 +669,61 @@ GetIpAddress():                   <%=GetIpAddress() %>
         debugOutput.AppendLine(string.Format("Error downloading JSON from {0}: {1}", url, ex.Message));
       }
       return string.Empty;
+    }
+  }
+
+  // Custom return type for IsWebsiteHiddenFromSearchEngines() below
+  public class RobotsStatus
+  {
+    public bool IsHidden { get; set; }
+    public bool IsMissing { get; set; }
+  }
+
+  /// <summary>Is the website hidden from search engines?</summary>
+  /// <returns>RobotsStatus: .IsHidden?, IsMissing? (/robots.txt file)</returns>
+  private RobotsStatus IsWebsiteHiddenFromSearchEngines()
+  {
+    try
+    {
+      string robotsPath = Server.MapPath("/robots.txt");
+      if (!System.IO.File.Exists(robotsPath))
+        return new RobotsStatus { IsHidden = false, IsMissing = true };
+
+      bool foundUserAgent = false;
+      
+      foreach (string line in System.IO.File.ReadLines(robotsPath))
+      {
+        string trimmedLine = line.Trim().ToLower();
+        
+        if (trimmedLine.StartsWith("user-agent:") && trimmedLine.Contains("*"))
+        {
+          foundUserAgent = true;
+          continue;
+        }
+        
+        if (foundUserAgent && trimmedLine.StartsWith("disallow:")) // && trimmedLine.Contains("/")
+        {
+          // debugOutput.AppendLine(string.Format("Line: {0}", trimmedLine));
+          string disallowedPath = trimmedLine.Substring(9).Trim();
+          // debugOutput.AppendLine(string.Format("disallowedPath: {0}", disallowedPath));
+          if (disallowedPath == "/")
+          {
+            return new RobotsStatus { IsHidden = true, IsMissing = false };
+          }
+        }
+        
+        if (foundUserAgent && trimmedLine.StartsWith("user-agent:"))
+        {
+          foundUserAgent = false;
+        }
+      }
+      
+      return new RobotsStatus { IsHidden = false, IsMissing = false };
+    }
+    catch (System.Exception ex)
+    {
+      if (isDebug) debugOutput.AppendLine(string.Format("Error reading robots.txt: {0}", ex.Message));
+      return new RobotsStatus { IsHidden = false, IsMissing = true };
     }
   }
 

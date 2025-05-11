@@ -14,6 +14,7 @@
   TODO (started) show DNN security-related settings; PB ... More Security Settings, Show Critical Errors, Debug Mode
   TODO this could be more helpful if there was an ENV or global setting showing if the site is in production (live) or not; e.g. certain settings could become warnings
   
+  TODO Need to display the robots.txt state: visible or hidden
   DONE add option to add URL that will not process or show debug output (e.g. ?details=off or /details/off)
   DONE update WebClient() to System.Net.Http.HttpClient() (async/await) for LoadAllowedIps()
   DONE with Session and Persistence, show whether or not DNN has Enable Remember on or off (Security/More)
