@@ -12,7 +12,7 @@
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
   const bool showAllForSuper = true; // show all details and debug for SuperUsers
-  const string debugVersion = "WIP.2025.01.22";
+  const string debugVersion = "WIP 2025.05.10 << WIP.2025.01.22";
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 
@@ -117,11 +117,23 @@
     debugOutput.AppendLine($"allUsersRoleId: {allUsersRoleId}");
 %>
 
+<details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:#fff7de;">
+  <summary>
+    <h6 style="display:inline-block;">
+      Page Id: <%=PortalSettings.ActiveTab.TabID %> - 
+      DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> 
+      w 2sxc <%=GetVersion("ToSic.Sxc") %> 
+      on <%=System.Net.Dns.GetHostName() %> (<%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>)
+      from WAN IP: <%=GetIpAddress() %>
+    </h6>
+  </summary>
+
   <div class="alert alert-warning m-0 text-monospace d-print-none" role="alert">
+
     <%-- DNN / HOST --%>
     <div class="mb-2">
       <p>
-        DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> / <%=System.Environment.Version.ToString() %> / Host=<%=System.Net.Dns.GetHostName() %>, 
+        .NET CLR: <%=System.Environment.Version.ToString() %> <%=System.Net.Dns.GetHostName() %>, 
         DebugMode: <%=IconToggle(DotNetNuke.Entities.Host.Host.DebugMode, "xl") %>, 
         ShowCriticalErrors: <%=IconToggle(DotNetNuke.Entities.Host.Host.ShowCriticalErrors, "xl") %>
       </p>
@@ -219,26 +231,34 @@
     </p>
 
   </div>
+</details>
 <% } %>
 
 <% if ( showDebug ) { %>
-<div style="margin:0;padding:1rem;background-color:lightgray;">
-<p style="font-size:larger;font-weight:bold;">DEBUGGING OUTPUT (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>), WAN IP: <%=GetIpAddress() %></p>
-<pre>
-debugOutput:
-<%=debugOutput.ToString().Trim() %>
+<details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:lightgray;">
+  <summary>
+    <h6 style="display:inline-block;">
+      DEBUGGING OUTPUT (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>)
+    </h6>
+  </summary>
 
-HttpContext
-.Current.Request.IsLocal:         <%=HttpContext.Current.Request.IsLocal %>
-.UserHostAddress:                 <%=HttpContext.Current.Request.UserHostAddress %>
-.ServerVariables["LOCAL_ADDR"]:   <%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>
-.ServerVariables["REMOTE_ADDR"]:  <%=HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] %>
-.Headers["CF-Connecting-IP"]:     <%=HttpContext.Current.Request.Headers["CF-Connecting-IP"] %>
-.Headers["X-Forwarded-For"]:      <%=HttpContext.Current.Request.Headers["X-Forwarded-For"] %>
+  <div>
+  <pre>
+  debugOutput:
+  <%=debugOutput.ToString().Trim() %>
 
-GetIpAddress():                   <%=GetIpAddress() %>
-</pre>
-</div>
+  HttpContext
+  .Current.Request.IsLocal:         <%=HttpContext.Current.Request.IsLocal %>
+  .UserHostAddress:                 <%=HttpContext.Current.Request.UserHostAddress %>
+  .ServerVariables["LOCAL_ADDR"]:   <%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>
+  .ServerVariables["REMOTE_ADDR"]:  <%=HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] %>
+  .Headers["CF-Connecting-IP"]:     <%=HttpContext.Current.Request.Headers["CF-Connecting-IP"] %>
+  .Headers["X-Forwarded-For"]:      <%=HttpContext.Current.Request.Headers["X-Forwarded-For"] %>
+
+  GetIpAddress():                   <%=GetIpAddress() %>
+  </pre>
+  </div>
+</details>
 <% } %>
 
 <script runat="server">
