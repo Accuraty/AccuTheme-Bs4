@@ -1,4 +1,4 @@
-# AccuTheme
+# AccuTheme-Bs4
 
 - [Main README](/README.md) - introduction
 - **Initial setup** - this document
@@ -12,14 +12,14 @@
 
 ## Initial setup
 
-_This assumes the project has not been started. If it already exists on GitHub and you need to get set up on your own machine, skip to [Cloning locally](https://github.com/Accuraty/AccuTheme#cloning-locally)._
+_This assumes the project has not been started. If it already exists on GitHub and you need to get set up on your own machine, skip to [Cloning locally](https://github.com/Accuraty/-Bs4#cloning-locally)._
 
 ### 1. Get the code
 
 Create a new project folder on your local machine, `cd` into that directory, and run the following commands in your terminal:
 
 ```
-git clone -b main --single-branch https://github.com/Accuraty/AccuTheme.git .
+git clone -b main --single-branch https://github.com/Accuraty/AccuTheme-Bs4.git .
 rm -rf .git
 git init
 ```

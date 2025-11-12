@@ -1,7 +1,7 @@
 <dotnetnuke type="Package" version="9.0">
   <packages>
-    <package name="AccuTheme" type="Skin" version="1.0.2">
-      <friendlyName>AccuTheme</friendlyName>
+    <package name="AccuTheme-Bs4" type="Skin" version="1.0.2">
+      <friendlyName>AccuTheme-Bs4</friendlyName>
       <description>A DNN Theme created by Accuraty.</description>
       <iconFile>AccuThemeIcon.png</iconFile>
       <owner>
@@ -19,8 +19,8 @@
       <components>
         <component type="Skin">
           <skinFiles>
-            <basePath>Portals\_default\Skins\AccuTheme\</basePath>
-            <skinName>AccuTheme</skinName>
+            <basePath>Portals\_default\Skins\AccuTheme-Bs4\</basePath>
+            <skinName>AccuTheme-Bs4</skinName>
 
             <skinFile>
               <path />
@@ -41,7 +41,7 @@
         <!-- Menus, Includes, Controls, and Root -->
         <component type="ResourceFile">
           <resourceFiles>
-            <basePath>Portals\_default\Skins\AccuTheme\</basePath>
+            <basePath>Portals\_default\Skins\AccuTheme-Bs4\</basePath>
             <resourceFile>
               <name>main.zip</name>
             </resourceFile>
@@ -51,7 +51,7 @@
         <!-- Containers -->
         <component type="ResourceFile">
           <resourceFiles>
-            <basePath>Portals\_default\Containers\AccuTheme\</basePath>
+            <basePath>Portals\_default\Containers\AccuTheme-Bs4\</basePath>
             <resourceFile>
               <name>cont.zip</name>
             </resourceFile>

@@ -4,6 +4,10 @@ Added Jan 2025, this is a good place to note significant changes to the project.
 
 *Only thing to maintain: keep the heading matching the "version" in `package.json`.*
 
+## AccuTheme-Bs4 v1.1.2 - 202511
+
+- renamed theme folder ../skins/AccuTheme-Bs4 (added -Bs4)
+
 ## AccuTheme-Bs4 v1.1.0 - 202501
 
 - migrating build, watch, and other tasks away from Gulp (finally)

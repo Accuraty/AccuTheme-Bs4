@@ -10,7 +10,7 @@
     "      used in webpack.stylelint.config.js and associated to lint scss files."
   ],
   "name": "accutheme-bs4",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Bootstrap v4.6.2 custom theme starter for DNN Platform websites",
   "exports": "./gulpfile.js",
   "scripts": {

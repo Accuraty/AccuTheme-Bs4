@@ -1,4 +1,4 @@
-# AccuTheme Skin
+# AccuTheme-Bs4 Skin
 
 ## Architecture
 
