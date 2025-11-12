@@ -4,6 +4,7 @@
   "username": "abbv20yyftpFML",
   "password": "PASSWeRD14$$##",
   "context": "./dnn",
+  "remotePath": "/",
   "protocol": "ftp",
   "port": 21,
   "secure": true,
@@ -49,7 +50,6 @@
     "Thumbs.db",
     ".DS_Store"
   ],
-  "remotePath": "/",
   "remoteExplorer": {
     "filesExclude": [
       "/.well-known",
