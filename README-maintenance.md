@@ -1,4 +1,4 @@
-# AccuTheme
+# AccuTheme-Bs4
 
 ## Template Project Maintenance
 

@@ -28,6 +28,8 @@ real-favicon-generator.json
 # Accuraty utility (convenience); ignore any files OR folders so they do NOT get in to Git/GitHub
 **/*-gitignore.*
 **/*-tmp.*
+*-gitignore/
+*-gitignore
 
 # ENVIRONMENT
 .env

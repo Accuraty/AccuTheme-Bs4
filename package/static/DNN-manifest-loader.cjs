@@ -1,7 +1,7 @@
 module.exports = function (source) {
   source = source.replace(
     /\<package name\=\"(.*?)(?=\")/,
-    '<package name="AccuTheme'
+    '<package name="AccuTheme-Bs4'
   );
   source = source.replace(
     /type\=\"Skin\" version\=\"(.*?)(?=\")/,
@@ -9,7 +9,7 @@ module.exports = function (source) {
   );
   source = source.replace(
     /\<friendlyName\>(.*?)(?=\<)/,
-    '<friendlyName>AccuTheme'
+    '<friendlyName>AccuTheme-Bs4</friendlyName>'
   );
   source = source.replace(
     /\<description\>(.*?)(?=\<)/,
@@ -22,11 +22,11 @@ module.exports = function (source) {
   );
   source = source.replace(/\<url\>(.*?)(?=\<)/, '<url>https://accuraty.com/');
   source = source.replace(/\<email\>(.*?)(?=\<)/, '<email>info@accuraty.com');
-  source = source.replace(/\<skinName\>(.*?)(?=\<)/, '<skinName>AccuTheme');
-  source = source.replace(/(\\Skins\\)(.*?)(?=\\)/g, '\\Skins\\AccuTheme');
+  source = source.replace(/\<skinName\>(.*?)(?=\<)/, '<skinName>AccuTheme-Bs4');
+  source = source.replace(/(\\Skins\\)(.*?)(?=\\)/g, '\\Skins\\AccuTheme-Bs4');
   source = source.replace(
     /(\\Containers\\)(.*?)(?=\\)/g,
-    '\\Containers\\AccuTheme'
+    '\\Containers\\AccuTheme-Bs4'
   );
   return `${source}`;
 };

@@ -15,7 +15,7 @@ const {
   CUSTOM_SCRIPTS,
 } = env;
 
-export const name = 'AccuTheme';
+export const name = 'AccuTheme-Bs4';
 export const mode = NODE_ENV || PROJECT_MODE || 'development';
 export const fonts = isTrue(LOCAL_FONTS);
 export const svg = isTrue(LOCAL_SVG);

@@ -20,7 +20,7 @@
     "delete": true
   },
   "watcher": {
-    "files": "**/AccuTheme/**/*",
+    "files": "**/AccuTheme-Bs4/**/*",
     "autoUpload": true,
     "autoDelete": false
   },

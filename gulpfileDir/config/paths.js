@@ -1,6 +1,6 @@
 // import { env } from 'process'; //How to access process.env in ES6
 import { name, faviconFile } from './project.js';
-// const name = 'AccuTheme';
+// const name = 'AccuTheme-Bs4';
 // const { faviconFile } = env;
 const SRC_NAME = 'src';
 const DIST_NAME = 'dist';
