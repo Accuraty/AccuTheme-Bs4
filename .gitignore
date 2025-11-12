@@ -50,6 +50,7 @@ sh.exe.stackdump
 sftp-config.json
 .vscode/sftp.json
 dnn/web.config
+dnn/webConnections.config
 
 # .sln/.csproj VS Code IntelliSense detritus to ignore
 .vs/
@@ -58,10 +59,10 @@ obj/
 
 # 2sxc Content App Generated and app original cs files
 **/Portals/**/2sxc/**/AppCode/**/*.cs
-!**/Portals/**/2sxc/**/AppCode/**/*.Accuraty.cs
+!**/Portals/**/2sxc/**/AppCode/**/*.Accu*.cs
 !**/Portals/**/2sxc/**/AppCode/Accu/*.*
 
-# new experimental idea, ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders 
+# new experimental idea, ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders
 # because we don't edit these and would never want to check them in
 **/Portals/**/2sxc/**/bs3/
 **/Portals/**/2sxc/**/bs4/

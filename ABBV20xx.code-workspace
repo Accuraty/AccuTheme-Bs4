@@ -72,8 +72,9 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-      "webpack.config.js": "webpack.*.js",
-      "*.code-workspace": ".env, .browserslistrc, eslint.config.*, .*.json, .git*, .editorconfig, .nvmrc, .*ignore, gulp*.js",
+      "dnn9.sln": "dnn9*, global.json, omnisharp.json",
+      "package.json": "package*.json, .env, *.config.js, *.config.ts, rollup.*js",
+      "*.code-workspace": ".browserslistrc, .eslint*, .prettier*, .git*, .editorconfig, .nvmrc, .*ignore",
       "README.md": "READ*",
     }
   },
