@@ -16,7 +16,8 @@
       </div>
 
       <%-- NAV MENUS --%>
-      <div class="footer__nav  col-12 col-md-8">
+      <%-- Hiding the footer__nav, can bring it back if the project requires it --%>
+      <%-- <div class="footer__nav  col-12 col-md-8">
         <div class="row">
           <div class="col-6 col-md-4">
             <dl class="mb-4">
@@ -98,10 +99,11 @@
             </dl>
           </div>
         </div>
-      </div>
+      </div> --%>
 
       <%-- CALL TO ACTION --%>
-      <div class="footer__cta  col-12 col-md-4">
+      <%-- Hiding the footer__cta, can bring it back if the project requires it --%>
+      <%-- <div class="footer__cta  col-12 col-md-4">
         <div class="my-5 my-md-0">
           <label for="newsletterEmail" class="font-weight-bold py-1">Subscribe to our newsletter</label>
           <div class="input-group">
@@ -111,7 +113,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --%>
 
       <%-- META: COPYRIGHT --%>
       <div class="footer__meta  col-12 col-md-6 mt-4 mt-md-5">
