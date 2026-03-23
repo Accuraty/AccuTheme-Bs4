@@ -13,6 +13,7 @@ export default class Header {
     this.config = { ...Header.defaults, ...config };
     this.scrollingDown = null;
     this.scrollingUp = null;
+    this.fixedTopYPos = null;
     this.init();
   }
 
@@ -40,14 +41,54 @@ export default class Header {
   }
 
   onScrollDown = () => {
+    this.fixedTopYPos = null;
+    if(window.innerWidth <= 767)
+    {
+      return;
+    }
     if (!this.scrollingDown) {
       this.element.classList.add(this.config.scrollClass);
+      const headerHeight = 100;
+      const distanceFromTop = Math.abs(
+        document.body.getBoundingClientRect().top
+      );
+      if (distanceFromTop >= headerHeight && document.querySelector('html').offsetHeight - this.element.offsetHeight > window.innerHeight)
+      {
+        this.element.classList.add('fixed-top');
+        this.fixedTopYPos = Math.abs(document.body.getBoundingClientRect().top);
+      }
+      else
+      {
+        this.element.classList.remove('fixed-top');
+      }
       this.scrollingDown = true;
       this.scrollingUp = false;
     }
   };
 
-  onScrollUp = () => {
+  onScrollUp = () => { 
+    if(this.fixedTopYPos != null && this.fixedTopYPos === Math.abs(document.body.getBoundingClientRect().top))
+    {
+      this.fixedTopYPos = null;
+      return;
+    }
+    this.fixedTopYPos = null;
+    if(window.innerWidth <= 767)
+    {
+      return;
+    }
+    const headerHeight = 100;
+    const distanceFromTop = Math.abs(
+      document.body.getBoundingClientRect().top
+    );
+    if (distanceFromTop >= headerHeight && document.querySelector('html').offsetHeight - this.element.offsetHeight > window.innerHeight) 
+    {
+      this.element.classList.add('fixed-top');
+    }
+    else 
+    {
+      this.element.classList.remove('fixed-top');
+    }
     if (!this.scrollingUp) {
       this.element.classList.remove(this.config.scrollClass);
       this.scrollingUp = true;
